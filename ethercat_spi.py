@@ -191,7 +191,7 @@ spi.mode = 3
 # spi.no_cs = True            # Disable hardware CS
 spi.bits_per_word = 8  # Data size is 8 bits (SPI_DATASIZE_8BIT)
 spi.cshigh = False  # Use hardware CS
-spi.lsbfirst = True  # MSB first (SPI_FIRSTBIT_MSB)
+# spi.lsbfirst = False  # MSB first (SPI_FIRSTBIT_MSB)
 spi.threewire = False  # Use 3-wire mode (SPI_DIRECTION_2LINES)
 # spi.loop = False  # Disable loopback mode
 
