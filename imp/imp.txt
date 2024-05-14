@@ -1,0 +1,91 @@
+scp /home/udaykumar/Desktop/draft/image.jpeg root@colibri-imx7-emmc-15048509.local:/home/root/pictures
+
+import spidev
+import time
+import ctypes
+
+# Define SPI device
+spi = spidev.SpiDev()
+spi.open(0, 0)  # (bus, device)
+
+# Constants for EtherCAT initialization
+RESET_CTL = 0x00
+BYTE_TEST = 0x04
+HW_CFG = 0x08
+DIGITAL_RST = 0x01
+ETHERCAT_RST = 0x02
+READY = 0x80000000
+COMM_SPI_WRITE = 0x02
+COMM_SPI_READ = 0x01
+DUMMY_BYTE = 0x00
+
+# Define structures to mimic C data types
+class ULONG(ctypes.Structure):
+    _fields_ = [("LANLong", ctypes.c_uint32)]
+
+class UWORD(ctypes.Structure):
+    _fields_ = [("LANWord", ctypes.c_uint16),
+                ("LANByte", ctypes.c_uint8 * 2)]
+
+# Function to write to ETC register
+def Etc_Write_Reg(address, DataOut):
+    Data = ULONG()
+    Addr = UWORD()
+    xfrbuf = (ctypes.c_uint8 * 7)()  # Create buffer for SPI transfer
+
+    Addr.LANWord = address
+    Data.LANLong = DataOut
+
+    xfrbuf[0] = COMM_SPI_WRITE     # SPI write command
+    xfrbuf[1] = Addr.LANByte[1]    # address high byte
+    xfrbuf[2] = Addr.LANByte[0]    # address low byte
+
+    for i in range(4):
+        xfrbuf[i + 3] = Data.LANByte[i]  # Fill data bytes, lsb first
+
+    # Transmit function
+    response = spi.xfer2(list(xfrbuf))  # Perform SPI transfer and receive response
+
+# Function to read from ETC register
+def Etc_Read_Reg(address, length):
+    Result = ULONG()  # Initialize Result as ULONG instance
+    Addr = UWORD()    # Initialize Addr as UWORD instance and set address
+    xfrbuf = (ctypes.c_uint8 * 7)()  # Create buffer for SPI transfer
+
+    Addr.LANWord = address
+
+    xfrbuf[0] = COMM_SPI_READ  # SPI read command
+    xfrbuf[1] = Addr.LANByte[1]  # Address high byte
+    xfrbuf[2] = Addr.LANByte[0]  # Address low byte
+
+    for i in range(length):
+        xfrbuf[i + 3] = DUMMY_BYTE  # Fill dummy bytes after address bytes
+
+    response = spi.xfer2(list(xfrbuf))  # Perform SPI transfer and receive response
+
+    for i in range(length):
+        Result.LANByte[i] = response[i + 3]  # Assign received bytes to Result.LANByte[i]
+
+    return Result.LANLong
+
+# Function to initialize EtherCAT
+def ethercat_init():
+    # Reset EtherCAT
+    Etc_Write_Reg(RESET_CTL, (DIGITAL_RST | ETHERCAT_RST))
+    time.sleep(0.1)
+
+    # Check if EtherCAT is ready
+    hw_cfg = Etc_Read_Reg(HW_CFG, 4)
+
+    if (hw_cfg & READY) == 0:
+        print("EtherCAT not ready, data received =", hw_cfg)
+        return False
+
+    print("EtherCAT initialization succeeded\n")
+    return True
+
+# Example usage
+ethercat_init()
+
+# Close SPI connection
+spi.close()
