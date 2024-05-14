@@ -30,7 +30,7 @@ def spi_transfer(data):
 # Example usage
 if __name__ == "__main__":
     while(True):
-        data_to_send = [0x03, 0x00, 0x50, 0xFF, 0xFF, 0xFF, 0xFF]
+        data_to_send = [0x03, 0x00, 0x64, 0xFF, 0xFF, 0xFF, 0xFF]
 
         # Perform SPI transfer
         received_data = spi_transfer(data_to_send)
