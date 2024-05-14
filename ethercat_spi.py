@@ -201,6 +201,7 @@ Etc_Buffer_In.LANByte[:] = [0] * 32      # etc routines
 #reads a directly addressable register
 #address = register to read, length = number of bytes to read (1,2,3,4), long is returned but only the requested bytes are meaningful, starting from LsByte
 
+
 def Etc_Read_Reg(address, length):
     Result = ULONG()  # Initialize Result as ULONG instance
     Addr = UWORD()    # Initialize Addr as UWORD instance and set address
