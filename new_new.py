@@ -28,7 +28,7 @@ spi.threewire = False  # Use 3-wire mode (SPI_DIRECTION_2LINES)
 
 while True:
   tx_data = [one, two, three, four, five, six, seven]
-  print(len(one))
+  print("Number of bytes sent:", len(tx_data))
   # Perform SPI transaction
   rx_data = spi.xfer2(tx_data)
   # Display received data
