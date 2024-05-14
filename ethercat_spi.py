@@ -387,7 +387,7 @@ def Etc_Write_Fifo():
     response = spi.xfer2(list(xfrbuf))  # Perform SPI transfer and receive response
 
 
-"""
+
 # initialize / check the etc interface on SPI, return true if initialization is ok
 
 def etc_init():
@@ -418,16 +418,16 @@ def etc_init():
 
     return True
 
+
+
 """
-
-
 def etc_init():
     TempLong = ULONG()
     # time.sleep(0.3)
     TempLong.LANLong = Etc_Read_Reg(BYTE_TEST, 4)          # read test register
     print(TempLong.LANLong)
 
-
+"""
 
 # one scan of etc
 
