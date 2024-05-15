@@ -1,5 +1,6 @@
-import spidev
 from __future__ import division
+
+import spidev
 import time
 import math
 
