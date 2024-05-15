@@ -96,6 +96,7 @@ def main():
     while(True):
         axes_data = get_axes()
         print("Accelerometer data:", axes_data)
+        time.sleep(0.2)
 
     # Close SPI connection
     spi.close()
