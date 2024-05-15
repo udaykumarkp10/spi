@@ -63,10 +63,10 @@ def set_register(self, address, value):
   spi.writebytes( [ address, value ] )
 
 def get_axes(self):
-  bytes = self.get_registers(REG_DATAX0, 6)
-  x = self._convert(bytes[0], bytes[1])
-  y = self._convert(bytes[2], bytes[3])
-  z = self._convert(bytes[4], bytes[5])
+  bytes = get_registers(REG_DATAX0, 6)
+  x = convert(bytes[0], bytes[1])
+  y = convert(bytes[2], bytes[3])
+  z = convert(bytes[4], bytes[5])
 
   return {'x': x,
             'y': y,
