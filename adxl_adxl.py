@@ -65,7 +65,7 @@ def convert(lsb, msb):
   value = lsb | (msb << 8)
   if value & 0x8000:
     value = -value ^ 0xFFFF
-  if not _full_resolution:
+  if not full_resolution:
     value = value << self._range
   value *= SCALE_FACTOR
   return value
