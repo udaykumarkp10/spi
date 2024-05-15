@@ -190,7 +190,10 @@ def main():
 
     while(True):
         axes_data = get_axes()
-        print("Accelerometer data:", axes_data)
+        x = acceleration['x']* 0.0078
+        y = acceleration['y']* 0.0078
+        z = acceleration['z']* 0.0078
+        print("Acceleration - X: %.2f g, Y: %.2f g, Z: %.2f g" % (x, y, z))
         time.sleep(0.2)
 
     # Close SPI connection
