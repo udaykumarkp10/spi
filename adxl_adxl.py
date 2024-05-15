@@ -37,6 +37,18 @@ WRITE_MASK = 0x0
 READ_MASK = 0x80
 MULTIREAD_MASK = 0x40
 
+# SPI setup
+spi = spidev.SpiDev()
+spi.open(2, 0)  # Assuming SPI bus 0, device 0
+spi.max_speed_hz = 30000000
+spi.mode = 0b11
+
+# Additional settings
+spi.bits_per_word = 8  # Data size is 8 bits (SPI_DATASIZE_8BIT)
+spi.cshigh = False  # Use hardware CS
+spi.lsbfirst = False  # MSB first (SPI_FIRSTBIT_MSB)
+spi.threewire = False  # Use 3-wire mode (SPI_DIRECTION_2LINES)
+
 def get_device_id():
     return get_register(REG_DEVICE_ID)
 
