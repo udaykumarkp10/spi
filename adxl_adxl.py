@@ -71,6 +71,18 @@ def get_axes(self):
   return {'x': x,
             'y': y,
             'z': z}
-  
 
+def main():
+    # Get device ID
+    device_id = get_device_id()
+    print("Device ID:", device_id)
 
+    # Get accelerometer data
+    axes_data = get_axes()
+    print("Accelerometer data:", axes_data)
+
+    # Close SPI connection
+    spi.close()
+
+if __name__ == "__main__":
+    main()
