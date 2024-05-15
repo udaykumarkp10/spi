@@ -53,7 +53,7 @@ def _convert(self, lsb, msb):
   value = lsb | (msb << 8)
   if value & 0x8000:
     value = -value ^ 0xFFFF
-  if not self._full_resolution:
+  if not _full_resolution:
     value = value << self._range
   value *= SCALE_FACTOR
   return value
