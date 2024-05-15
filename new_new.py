@@ -2,6 +2,17 @@ import spidev
 import time
 import ctypes
 
+
+# Define byte values
+reset_one = ctypes.c_uint8(0x02).value
+reset_two = ctypes.c_uint8(0x01).value
+reset_three = ctypes.c_uint8(0xF8).value
+reset_four = ctypes.c_uint8(0x00).value
+reset_five = ctypes.c_uint8(0x00).value
+reset_six = ctypes.c_uint8(0x00).value
+reset_seven = ctypes.c_uint8(0x00).value
+
+
 # Define byte values
 one = ctypes.c_uint8(0x03).value
 two = ctypes.c_uint8(0x00).value
@@ -27,6 +38,13 @@ spi.threewire = False  # Use 3-wire mode (SPI_DIRECTION_2LINES)
 # spi.loop = False  # Disable loopback mode
 
 while True:
+  #reset
+  tx = [reset_one, reset_two, reset_three, reset_four, reset_five, reset_six, reset_seven]
+  print("Number of bytes sent:", len(tx))
+  rx = spi.xfer2(tx)
+  print("Received Data:", rx)
+
+  #byte test
   tx_data = [one, two, three, four, five, six, seven]
   print("Number of bytes sent:", len(tx_data))
   # Perform SPI transaction
