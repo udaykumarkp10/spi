@@ -37,7 +37,7 @@ WRITE_MASK = 0x0
 READ_MASK = 0x80
 MULTIREAD_MASK = 0x40
 
-def get_device_id(self):
+def get_device_id():
     return get_register(REG_DEVICE_ID)
 
 def get_register(address):
@@ -49,7 +49,7 @@ def get_registers(address, count):
   value = spi.readbytes(count)
   return value
 
-def _convert(self, lsb, msb):
+def _convert(lsb, msb):
   value = lsb | (msb << 8)
   if value & 0x8000:
     value = -value ^ 0xFFFF
@@ -62,7 +62,7 @@ def _convert(self, lsb, msb):
 def set_register(self, address, value):
   spi.writebytes( [ address, value ] )
 
-def get_axes(self):
+def get_axes():
   bytes = get_registers(REG_DATAX0, 6)
   x = convert(bytes[0], bytes[1])
   y = convert(bytes[2], bytes[3])
