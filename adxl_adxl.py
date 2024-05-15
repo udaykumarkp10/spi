@@ -36,6 +36,7 @@ REG_FIFO_STATUS = 0x39
 WRITE_MASK = 0x0
 READ_MASK = 0x80
 MULTIREAD_MASK = 0x40
+full_resolution = True
 
 # SPI setup
 spi = spidev.SpiDev()
