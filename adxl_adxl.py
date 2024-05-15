@@ -74,6 +74,23 @@ def set_range(range, full_resolution=True):
     send_data_format()
 
 
+  def send_data_format(self, self_test=0, spi=0, int_invert=0, justify=0):
+    data_format = range & 0x03
+    
+    if justify:
+      data_format |= 0x04
+    if full_resolution:
+      data_format |= 0x08
+    if int_invert:
+      data_format |= 0x20
+    if spi:
+      data_format |= 0x40
+    if self_test:
+      data_format |= 0x80
+    
+    set_register(REG_DATA_FORMAT, data_format)
+
+
 def set_data_rate(hz, low_power=False):
     if hz >= 3200:
       rate = 3200
