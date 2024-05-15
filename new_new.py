@@ -26,6 +26,9 @@ seven = ctypes.c_uint8(0xFF).value
 # SPI setup
 spi = spidev.SpiDev()
 spi.open(2, 0)  # Assuming SPI bus 0, device 0
+
+"""
+
 spi.max_speed_hz = 30000000  # Adjust as needed
 spi.mode = 3
 
@@ -36,6 +39,8 @@ spi.cshigh = False  # Use hardware CS
 spi.lsbfirst = False  # MSB first (SPI_FIRSTBIT_MSB)
 spi.threewire = False  # Use 3-wire mode (SPI_DIRECTION_2LINES)
 # spi.loop = False  # Disable loopback mode
+
+"""
 
 while True:
   #reset
