@@ -40,7 +40,7 @@ MULTIREAD_MASK = 0x40
 # SPI setup
 spi = spidev.SpiDev()
 spi.open(2, 0)  # Assuming SPI bus 0, device 0
-spi.max_speed_hz = 30000000
+spi.max_speed_hz = 5000000
 spi.mode = 0b11
 
 # Additional settings
