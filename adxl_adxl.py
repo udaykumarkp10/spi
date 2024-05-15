@@ -78,8 +78,8 @@ def main():
     print("Device ID:", device_id)
 
     # Get accelerometer data
-    axes_data = get_axes()
-    print("Accelerometer data:", axes_data)
+    # axes_data = get_axes()
+    # print("Accelerometer data:", axes_data)
 
     # Close SPI connection
     spi.close()
