@@ -1,6 +1,7 @@
 import spidev
 from __future__ import division
 import time
+import math
 
 # Registers
 REG_DEVICE_ID = 0x00
