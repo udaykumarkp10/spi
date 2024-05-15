@@ -40,6 +40,7 @@ WRITE_MASK = 0x0
 READ_MASK = 0x80
 MULTIREAD_MASK = 0x40
 full_resolution = True
+range = 0
 
 # SPI setup
 spi = spidev.SpiDev()
