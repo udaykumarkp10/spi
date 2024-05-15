@@ -75,7 +75,7 @@ def convert(lsb, msb):
   return value
   
  
-def set_register(self, address, value):
+def set_register(address, value):
   spi.writebytes( [ address, value ] )
 
 def get_axes():
