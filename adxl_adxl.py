@@ -56,6 +56,77 @@ spi.threewire = False  # Use 3-wire mode (SPI_DIRECTION_2LINES)
 def get_device_id():
     return get_register(REG_DEVICE_ID)
 
+def set_range(range, full_resolution=True):
+    """ Set the G range and the resolution. Valid range values are 2, 4, 8, 16. Full resolution set either 10-bit or 13-bit resolution """
+    if range == 2:
+      range_code = 0x0
+    elif range == 4:
+      range_code = 0x1
+    elif range == 8:
+      range_code = 0x2
+    elif range == 16:
+      range_code = 0x3
+    else:
+      raise ValueError("invalid range [" + str(range) + "] expected one of [2, 4, 8, 16]")
+
+    range = range_code
+    full_resolution = full_resolution
+    send_data_format()
+
+
+def set_data_rate(hz, low_power=False):
+    if hz >= 3200:
+      rate = 3200
+      rate_code = 0b1111
+    elif hz >= 1600 and hz < 3200:
+      rate = 1600
+      rate_code = 0b1110
+    elif hz >= 800 and hz < 1600:
+      rate = 800
+      rate_code = 0b1101
+    elif hz >= 400 and hz < 800:
+      rate = 400
+      rate_code = 0b1100
+    elif hz >= 200 and hz < 400:
+      rate = 200
+      rate_code = 0b1011
+    elif hz >= 100 and hz < 200:
+      rate = 100
+      rate_code = 0b1010
+    elif hz >= 50 and hz < 100:
+      rate = 50
+      rate_code = 0b1001
+    elif hz >= 25 and hz < 50:
+      rate = 25
+      rate_code = 0b1000
+    elif hz >= 25/2 and hz < 25:
+      rate = 25/2
+      rate_code = 0b0111
+    elif hz >= 25/4 and hz < 25/2:
+      rate = 25/4
+      rate_code = 0b0110
+    elif hz >= 25/8 and hz < 25/4:
+      rate = 25/8
+      rate_code = 0b0101
+    elif hz >= 25/16 and hz < 25/8:
+      rate = 25/16
+      rate_code = 0b0100
+    elif hz >= 25/32 and hz < 25/16:
+      rate = 25/32
+      rate_code = 0b0011
+    elif hz >= 25/64 and hz < 25/32:
+      rate = 25/64
+      rate_code = 0b0010
+    elif hz >= 25/128 and hz < 25/64:
+      rate = 25/128
+      rate_code = 0b0001
+    elif hz < 25/128:
+      rate = 25/256
+      rate_code = 0
+    
+    if low_power:
+      rate_code = rate_code | 0x10
+
 def get_register(address):
   value = spi.xfer2( [ (address & 0x3F) | READ_MASK] )
   return value;
