@@ -75,7 +75,7 @@ def set_range(range, full_resolution=True):
     send_data_format()
 
 
-def send_data_format(self, self_test=0, spi=0, int_invert=0, justify=0):
+def send_data_format(self_test=0, spi=0, int_invert=0, justify=0):
     data_format = range & 0x03
     
     if justify:
