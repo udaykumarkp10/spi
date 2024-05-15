@@ -38,7 +38,7 @@ if __name__ == "__main__":
 
     while(True):
         # Read the device ID register (register address 0x00)
-        device_id = adxl345.get_register(0xAA)
+        device_id = adxl345.get_register(0x00)
 
         # Print the device ID
         print("Device ID:", device_id)
