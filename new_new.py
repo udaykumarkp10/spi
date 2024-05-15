@@ -5,7 +5,7 @@ import ctypes
 # Define byte values
 one = ctypes.c_uint8(0x03).value
 two = ctypes.c_uint8(0x00).value
-three = ctypes.c_uint8(0x50).value
+three = ctypes.c_uint8(0x64).value
 four = ctypes.c_uint8(0xFF).value
 five = ctypes.c_uint8(0xFF).value
 six = ctypes.c_uint8(0xFF).value
