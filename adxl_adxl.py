@@ -164,6 +164,9 @@ def main():
     device_id = get_device_id()
     print("Device ID:", device_id)
 
+    set_range(16)
+    set_data_rate(100)
+
     while(True):
         axes_data = get_axes()
         print("Accelerometer data:", axes_data)
