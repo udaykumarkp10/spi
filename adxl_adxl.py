@@ -61,7 +61,7 @@ def get_registers(address, count):
   value = spi.readbytes(count)
   return value
 
-def _convert(lsb, msb):
+def convert(lsb, msb):
   value = lsb | (msb << 8)
   if value & 0x8000:
     value = -value ^ 0xFFFF
