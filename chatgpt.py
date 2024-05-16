@@ -19,7 +19,7 @@ def read_signed_16bit(data):
 
 # Initialize SPI
 spi = spidev.SpiDev()
-spi.open(0, 0)  # Open SPI bus 0, device 0
+spi.open(2, 0)  # Open SPI bus 0, device 0
 
 # Function to read accelerometer data
 def read_acceleration():
