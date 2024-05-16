@@ -1,6 +1,5 @@
 import spidev
 import time
-import math
 
 # ADXL345 Registers
 REG_DATAX0 = 0x32
@@ -37,13 +36,6 @@ def read_acceleration():
 
     return x_acc, y_acc, z_acc
 
-def calculate_angle(x_acc, y_acc, z_acc):
-    # Calculate pitch and roll angles
-    pitch = math.atan2(x_acc, math.sqrt(y_acc**2 + z_acc**2)) * (180 / math.pi)
-    roll = math.atan2(y_acc, math.sqrt(x_acc**2 + z_acc**2)) * (180 / math.pi)
-
-    return pitch, roll
-
 # Main function
 def main():
     try:
@@ -51,11 +43,11 @@ def main():
             # Read accelerometer data
             x_acc, y_acc, z_acc = read_acceleration()
 
-            # Calculate pitch and roll angles
-            pitch, roll = calculate_angle(x_acc, y_acc, z_acc)
-
-            # Print angles
-            print("Pitch: {:.2f} degrees, Roll: {:.2f} degrees".format(pitch, roll))
+            # Print acceleration values along X, Y, and Z axes
+            print("Acceleration (X): {:.2f} g".format(x_acc))
+            print("Acceleration (Y): {:.2f} g".format(y_acc))
+            print("Acceleration (Z): {:.2f} g".format(z_acc))
+            print()
 
             # Wait before the next reading
             time.sleep(0.1)
