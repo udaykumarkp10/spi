@@ -63,7 +63,7 @@ def main():
             print()
 
             # Wait before the next reading
-            time.sleep(0.1)
+            time.sleep(0.8)
 
     except KeyboardInterrupt:
         # Clean up SPI
