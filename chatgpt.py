@@ -2,6 +2,8 @@ import spidev
 import time
 
 # ADXL345 Registers
+REG_POWER_CTL = 0x2D
+REG_DATA_FORMAT = 0x31
 REG_DATAX0 = 0x32
 REG_DATAX1 = 0x33
 REG_DATAY0 = 0x34
@@ -20,6 +22,14 @@ def read_signed_16bit(data):
 spi = spidev.SpiDev()
 spi.open(2, 0)  # Open SPI bus 0, device 0
 
+# Function to initialize ADXL345 sensor
+def initialize_sensor():
+    # Set data format to full resolution mode (±16g range)
+    spi.xfer2([REG_DATA_FORMAT, 0x0B])
+
+    # Enable measurement mode
+    spi.xfer2([REG_POWER_CTL, 0x08])
+
 # Function to read accelerometer data
 def read_acceleration():
     # Read accelerometer data from registers
@@ -29,7 +39,7 @@ def read_acceleration():
 
     # Convert raw data to acceleration values (assuming full range)
     # You may need to adjust the sensitivity and scale factors based on your configuration
-    scale_factor = 0.004  # Sensitivity scale factor for +/- 2g range (per LSB)
+    scale_factor = 0.0039  # Sensitivity scale factor for ±16g range (per LSB)
     x_acc = x_raw * scale_factor
     y_acc = y_raw * scale_factor
     z_acc = z_raw * scale_factor
@@ -39,6 +49,9 @@ def read_acceleration():
 # Main function
 def main():
     try:
+        # Initialize ADXL345 sensor
+        initialize_sensor()
+
         while True:
             # Read accelerometer data
             x_acc, y_acc, z_acc = read_acceleration()
