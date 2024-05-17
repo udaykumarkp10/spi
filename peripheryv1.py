@@ -16,7 +16,7 @@ try:
         print("Received data:", rx_data)
 
         # Delay for 0.1 seconds
-        time.sleep(0.1)
+        time.sleep(0.2)
 
 except KeyboardInterrupt:
     print("Ctrl+C detected. Exiting gracefully.")
