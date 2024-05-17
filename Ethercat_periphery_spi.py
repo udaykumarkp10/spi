@@ -195,6 +195,7 @@ Etc_Buffer_In.LANByte[:] = [0] * 32      # etc routines
 #reads a directly addressable register
 #address = register to read, length = number of bytes to read (1,2,3,4), long is returned but only the requested bytes are meaningful, starting from LsByte
 
+"""
 
 def Etc_Read_Reg(address, length):
     Result = ULONG()  # Initialize Result as ULONG instance
@@ -239,6 +240,53 @@ def Etc_Read_Reg(address, length):
 
 # write a directly addressable register, 4 bytes always
 # Address = register to write, DataOut = data to write
+
+"""
+
+def Etc_Read_Reg(address, length):
+    Result = ULONG()  # Initialize Result as ULONG instance
+    Addr = UWORD()    # Initialize Addr as UWORD instance and set address
+    xfrbuf = (ctypes.c_uint8 * 7)()  # Create buffer for SPI transfer
+
+    Addr.LANWord = address
+
+    xfrbuf[0] = COMM_SPI_READ  # SPI read command
+    xfrbuf[1] = Addr.LANByte[1]  # Address high byte
+    xfrbuf[2] = Addr.LANByte[0]  # Address low byte
+
+    print()
+    print("Entered Read_reg")
+    print()
+    print("xfrbuf before filling: ", end="")
+    for i in range(3):
+        print("{:02X} ".format(xfrbuf[i]), end="")          
+
+    for i in range(length):
+        xfrbuf[i + 3] = DUMMY_BYTE  # Fill dummy bytes after address bytes
+
+    print("\nxfrbuf after filling: ", end="")
+    for i in range(7):
+        print("{:02X} ".format(xfrbuf[i]), end="")
+
+    # Convert ctypes array to list of bytes
+    xfrbuf_list = [byte for byte in xfrbuf]
+
+    response = spi.transfer(xfrbuf_list)
+
+    # print("\nresponse:", response)  # Print the response received from spi.xfer(xfrbuf)
+
+    print()
+    print("Response in hexadecimal:")
+    for byte in response:
+        print("{:02X}".format(byte), end=" ")
+
+    # response = spi.xfer2(list(xfrbuf))  # Perform SPI transfer and receive response
+    Result.LANLong = 0
+
+    for i in range(length):
+        Result.LANByte[i] = response[i + 3]  # Assign received bytes to Result.LANByte[i]
+    return Result.LANLong
+
 
 def Etc_Write_Reg(address, DataOut):
     Data = ULONG()
