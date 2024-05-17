@@ -30,7 +30,7 @@ while True:
   print("Number of bytes sent:", len(tx))
   rx_data = spi.transfer(tx)
 
-  print("Received Data:", rx)
+  print("Received Data:", rx_data)
 
   """ 
   #byte test
