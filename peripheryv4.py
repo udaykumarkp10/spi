@@ -26,12 +26,14 @@ seven = ctypes.c_uint8(0xFF).value
 
 while True:
   #reset
+  """
   tx = [reset_one, reset_two, reset_three, reset_four, reset_five, reset_six, reset_seven]
   print("Number of bytes sent:", len(tx))
   rx_data = spi.transfer(tx)
 
   print("Received Data:", rx_data)
-
+  """
+  
   #byte test
   tx_data = [one, two, three, four, five, six, seven]
   print("Number of bytes sent:", len(tx_data))
