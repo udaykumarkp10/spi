@@ -279,6 +279,8 @@ def Etc_Read_Reg(address, length):
     print("Response in hexadecimal:")
     for byte in response:
         print("{:02X}".format(byte), end=" ")
+    print()
+    print("Done")
 
     # response = spi.xfer2(list(xfrbuf))  # Perform SPI transfer and receive response
     Result.LANLong = 0
