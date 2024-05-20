@@ -182,7 +182,7 @@ Etc_Buffer_In = PROCBUFFER()
 
 
 # Open SPI device
-spi = SPI("/dev/spidev2.0", 3, 30000000)  # SPI bus 2, device 0, 1 MHz
+spi = SPI("/dev/spidev2.0", 3, 1000000)  # SPI bus 2, device 0, 1 MHz
 
 spi.bits_per_word = 8  # Data size is 8 bits (SPI_DATASIZE_8BIT)
 spi.lsbfirst = False  # MSB first (SPI_FIRSTBIT_MSB)
