@@ -318,7 +318,9 @@ def Etc_Write_Reg(address, DataOut):
     for i in range(7):
         print("{:02X} ".format(xfrbuf[i]), end="")
 
-    response = spi.transfer(xfrbuf)
+    xfrbuf_list = [byte for byte in xfrbuf]
+
+    response = spi.transfer(xfrbuf_list)
 
     print("Response:", response)
     
