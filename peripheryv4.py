@@ -18,7 +18,7 @@ reset_seven = ctypes.c_uint8(0x00).value
 # Define byte values
 one = ctypes.c_uint8(0x03).value
 two = ctypes.c_uint8(0x00).value
-three = ctypes.c_uint8(0x64).value
+three = ctypes.c_uint8(0x50).value
 four = ctypes.c_uint8(0xFF).value
 five = ctypes.c_uint8(0xFF).value
 six = ctypes.c_uint8(0xFF).value
@@ -32,7 +32,6 @@ while True:
 
   print("Received Data:", rx_data)
 
-  """ 
   #byte test
   tx_data = [one, two, three, four, five, six, seven]
   print("Number of bytes sent:", len(tx_data))
@@ -41,7 +40,6 @@ while True:
   # Display received data
   print("Received Data:", rx_data)
 
-  """
   
   time.sleep(0.2)
 
