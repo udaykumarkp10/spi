@@ -467,6 +467,8 @@ def etc_init():
 
 def etc_init():
     TempLong = ULONG()
+
+    Etc_Write_Reg(RESET_CTL, (DIGITAL_RST & ETHERCAT_RST)) # Need to check "AND" Operator
     # time.sleep(0.3)
     TempLong.LANLong = Etc_Read_Reg(BYTE_TEST, 4)          # read test register
     print()
