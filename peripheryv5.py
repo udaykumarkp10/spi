@@ -32,7 +32,7 @@ while True:
 
   print("Received Data:", rx_data)
 
-  """ 
+
   #byte test
   tx_data = [one, two, three, four, five, six, seven]
   print("Number of bytes sent:", len(tx_data))
@@ -41,7 +41,6 @@ while True:
   # Display received data
   print("Received Data:", rx_data)
 
-  """
   
   time.sleep(0.2)
 
