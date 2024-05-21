@@ -470,7 +470,7 @@ def etc_init():
 def etc_init():
     TempLong = ULONG()
     # time.sleep(0.3)
-    TempLong.LANLong = Etc_Read_Reg(ID_REV, 4)          # read test register
+    TempLong.LANLong = Etc_Read_Reg(BYTE_TEST, 4)          # read test register
     print()
     print(TempLong.LANLong)
 
