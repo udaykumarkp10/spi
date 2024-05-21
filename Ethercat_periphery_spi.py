@@ -198,6 +198,12 @@ Etc_Buffer_In.LANByte[:] = [0] * 32      # etc routines
 
 """
 
+def adxl_read(address, nbytes=1):
+    address |= 0x80  # Read operation
+    address |= 0x40  # Multibyte read
+    rx_data = spi.transfer([address] + [0]*nbytes)
+    return rx_data[1:] if nbytes > 1 else rx_data[0]
+
 def Etc_Read_Reg(address, length):
     Result = ULONG()  # Initialize Result as ULONG instance
     Addr = UWORD()    # Initialize Addr as UWORD instance and set address
