@@ -28,9 +28,9 @@ def main():
         address = 0x0064
         received_data = lan9252_read(address)
 
-        # Print the received data
-        print("Received Data:", received_data)
-
+        # Print the received data in hexadecimal format
+        hex_data = ' '.join(f'0x{byte:02X}' for byte in received_data)
+        print("Received Data:", hex_data)
         # Wait for 1 second
         time.sleep(1)
 
