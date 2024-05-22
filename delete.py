@@ -13,9 +13,9 @@ def lan9252_read(address, nbytes=7):
     # Prepare the command and address
     command = 0x03  # Read operation
     addr_high = (address >> 8) & 0xFF  # High byte of the address
-    print(addr_high)
+
     addr_low = address & 0xFF  # Low byte of the address
-    print(addr_low)
+
     data_to_send = [command, addr_high, addr_low] + [0xFF] * nbytes  # Use 0xFF as dummy data
 
     # Perform SPI transfer
