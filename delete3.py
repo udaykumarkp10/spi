@@ -2,7 +2,7 @@ from periphery import SPI
 import time
 
 # Open SPI device
-spi = SPI("/dev/spidev2.0", mode=3, max_speed=5000000)  # SPI bus 2, mode 3, 5 MHz
+spi = SPI("/dev/spidev2.0", mode=3, max_speed=3000000)  # SPI bus 2, mode 3, 5 MHz
 
 # SPI configuration
 spi.bits_per_word = 8  # Data size is 8 bits (SPI_DATASIZE_8BIT)
