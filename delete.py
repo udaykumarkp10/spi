@@ -27,7 +27,7 @@ def lan9252_read(address, nbytes=7):
 def main():
     while True:
         # Read 7 bytes from register 0x0064
-        address = 0x0050
+        address = 0x0064
         received_data = lan9252_read(address)
 
         # Print the received data in hexadecimal format
