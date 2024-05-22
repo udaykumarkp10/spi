@@ -2,7 +2,12 @@ from periphery import SPI
 import time
 
 # Open SPI device
-spi = SPI("/dev/spidev2.0", mode=3, max_speed=3000000)  # SPI bus 2, mode 3, 5 MHz
+spi = SPI("/dev/spidev2.0", mode=3, max_speed=3000000)  # SPI bus 2, mode 3, 3 MHz
+
+spi.bits_per_word = 8  # Data size is 8 bits (SPI_DATASIZE_8BIT)
+spi.lsbfirst = False  # MSB first (SPI_FIRSTBIT_MSB)
+spi.threewire = False  # Use 3-wire mode (SPI_DIRECTION_2LINES)
+spi.cshigh = False  # Chip Select active low
 
 def lan9252_read(address, nbytes=7):
     # Prepare the command and address
