@@ -14,7 +14,7 @@ def lan9252_read(address, nbytes=7):
     command = 0x03  # Read operation
     addr_high = (address >> 8) & 0xFF  # High byte of the address
     addr_low = address & 0xFF  # Low byte of the address
-    data_to_send = [command, addr_high, addr_low] + [FF] * nbytes
+    data_to_send = [command, addr_high, addr_low] + [0xFF] * nbytes  # Use 0xFF as dummy data
 
     # Perform SPI transfer
     rx_data = spi.transfer(data_to_send)
@@ -31,6 +31,7 @@ def main():
         # Print the received data in hexadecimal format
         hex_data = ' '.join(f'0x{byte:02X}' for byte in received_data)
         print("Received Data:", hex_data)
+        
         # Wait for 1 second
         time.sleep(1)
 
