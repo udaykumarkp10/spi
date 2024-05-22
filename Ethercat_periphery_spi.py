@@ -470,9 +470,8 @@ def etc_init():
 
 def etc_init():
     TempLong = ULONG()
-    # time.sleep(0.3)
-    TempLong.LANLong = adxl_read(0x0064, nbytes=7)
-    # TempLong.LANLong = Etc_Read_Reg(BYTE_TEST, 4)          # read test register
+    time.sleep(0.3)
+    TempLong.LANLong = Etc_Read_Reg(BYTE_TEST, 4)          # read test register
     print()
     print(TempLong.LANLong)
 
