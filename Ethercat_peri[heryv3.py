@@ -148,10 +148,6 @@ def etc_init():
         TempLong = Etc_Read_Reg(request, BYTE_TEST, 4)
 
 
-
-
-
-
 if __name__ == "__main__":
     while True:
         if not etc_init():
