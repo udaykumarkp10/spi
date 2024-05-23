@@ -113,6 +113,8 @@ def Etc_Read_Reg(request, address, length):
     # Convert ctypes array to list of bytes
     xfrbuf_list = [byte for byte in xfrbuf]
 
+    print(xfrbuf_list)
+
     request.set_value(LINE, Value.INACTIVE)
     response = spi.transfer(xfrbuf_list)
     request.set_value(LINE, Value.ACTIVE)
