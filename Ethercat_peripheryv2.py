@@ -482,9 +482,9 @@ def etc_init():
 
 def etc_init():
     TempLong = ULONG()
-    set_gpio_inactive(chip, LINE)
+
     TempLong.LANLong = Etc_Read_Reg(BYTE_TEST, 4)          # read test register
-    set_gpio_active(chip, LINE)
+
     print()
     print(TempLong.LANLong)
 
