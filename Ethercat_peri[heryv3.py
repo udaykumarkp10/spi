@@ -56,6 +56,7 @@ def Etc_Read_Reg(request, address, length):
     for i in range(length):
         Result.LANByte[i] = response_array[i + 3]
 
+    print(Result.LANLong)
     return Result.LANLong
 
 def etc_init():
@@ -71,14 +72,11 @@ def etc_init():
     ) as request:
         # Check if SPI communication works
         TempLong = Etc_Read_Reg(request, BYTE_TEST, 4)
-
-        return TempLong.LANLong == 0x87654321  # Return True if test passes
+	print(TempLong.LANLong)
 
 if __name__ == "__main__":
     while True:
-        if not etc_init():
+        etc_init():
             print("EtherCAT initialization failed")
-        else:
-            print("EtherCAT initialized successfully")
-
+	    
         time.sleep(0.2)  # Sleep for 0.2 seconds before running again
