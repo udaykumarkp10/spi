@@ -544,11 +544,12 @@ def main():
         },
     ) as request:
         
-    if not etc_init():
-        print("EtherCAT initialization failed")
-        return
+        if not etc_init():
+            print("EtherCAT initialization failed")
+            return
 
 if __name__ == "__main__":
     while True:
         main()  # Call the main function
-        time.sleep(0.2)  # Sleep for 2 seconds before running again
+        time.sleep(0.2)  # Sleep for 0.2 seconds before running again
+
