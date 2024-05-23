@@ -7,6 +7,25 @@ from gpiod.line import Direction, Value
 
 from ctypes import Union, LittleEndianStructure, c_uint16, c_uint32, c_uint8
 
+
+class UWORD(Union):
+    _fields_ = [("LANWord", c_uint16),                 # uint16_t LANWord
+                ("LANByte", c_uint8 * 2)]              # uint8_t LANByte[2]
+
+class ULONG(Union):
+    _fields_ = [("LANLong", c_uint32),                # uint32_t LANLong
+                ("LANWord", c_uint16 * 2),             # uint16_t LANWord[2]
+                ("LANByte", c_uint8 * 4)]             # uint8_t LANByte[4]
+
+class PROCBUFFER(Union):
+    _fields_ = [("LANByte", c_uint8 * 32),            # uint8_t LANByte[32]
+                ("LANLong", c_uint32 * 8)]            # uint32_t LANLong[8]
+
+# Define external buffer instances
+Etc_Buffer_Out = PROCBUFFER()
+Etc_Buffer_In = PROCBUFFER()
+
+
 # Define GPIO parameters
 LINE = 2  # Change this to the GPIO line you want to control
 
