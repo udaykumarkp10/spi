@@ -252,6 +252,10 @@ def Etc_Read_Reg(address, length):
 
 """
 
+def set_gpio_inactive(chip, line):
+    chip.set_value(line, Value.INACTIVE)
+
+
 def Etc_Read_Reg(address, length):
     Result = ULONG()  # Initialize Result as ULONG instance
     Addr = UWORD()    # Initialize Addr as UWORD instance and set address
