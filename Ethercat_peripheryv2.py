@@ -1,10 +1,22 @@
 from periphery import SPI
 import time
 import ctypes
+import gpiod
+
+from gpiod.line import Direction, Value
 
 from ctypes import Union, LittleEndianStructure, c_uint16, c_uint32, c_uint8
 
 # access to EtherCAT registers
+
+# Define GPIO parameters
+GPIO_CHIP_DEVICE = "/dev/gpiochip0"  # Change this to match your GPIO chip device
+LINE = 2  # Change this to the GPIO line you want to control
+
+
+
+
+
 RESET_CTL = 0x01F8
 ECAT_CSR_DATA = 0x0300
 ECAT_CSR_CMD = 0x0304
@@ -470,8 +482,9 @@ def etc_init():
 
 def etc_init():
     TempLong = ULONG()
-    time.sleep(0.3)
+    set_gpio_inactive(chip, LINE)
     TempLong.LANLong = Etc_Read_Reg(BYTE_TEST, 4)          # read test register
+    set_gpio_active(chip, LINE)
     print()
     print(TempLong.LANLong)
 
@@ -521,6 +534,10 @@ def etc_scan():
 
 def main():
     # Initialize EtherCAT interface
+    with gpiod.Chip(GPIO_CHIP_DEVICE) as chip:
+        line = chip.get_line(LINE)
+        line.request(consumer="custom-consumer", direction=Direction.OUTPUT, default_vals=[Value.INACTIVE])
+        
     if not etc_init():
         print("EtherCAT initialization failed")
         return
