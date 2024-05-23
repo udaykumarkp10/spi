@@ -74,9 +74,15 @@ def etc_init():
         TempLong = Etc_Read_Reg(request, BYTE_TEST, 4)
 
 
+
+
+
+
 if __name__ == "__main__":
     while True:
-        etc_init():
+        if not etc_init():
             print("EtherCAT initialization failed")
 	    
         time.sleep(0.2)  # Sleep for 0.2 seconds before running again
+
+
