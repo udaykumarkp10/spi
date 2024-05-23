@@ -109,6 +109,9 @@ def Etc_Read_Reg(request, address, length):
     for i in range(7):
         print("{:02X} ".format(xfrbuf[i]), end="")
 
+    # Convert ctypes array to list of bytes
+    xfrbuf_list = [byte for byte in xfrbuf]
+
     request.set_value(LINE, Value.INACTIVE)
     response = spi.transfer(xfrbuf_list)
     request.set_value(LINE, Value.ACTIVE)
