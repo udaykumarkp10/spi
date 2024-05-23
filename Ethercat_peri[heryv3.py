@@ -85,6 +85,7 @@ def Etc_Read_Reg(request, address, length):
 
 
 def Etc_Read_Reg(request, address, length):
+    print("Entered")
     Result = ULONG()  # Initialize Result as ULONG instance
     Addr = UWORD()    # Initialize Addr as UWORD instance and set address
     xfrbuf = (ctypes.c_uint8 * 7)()  # Create buffer for SPI transfer
