@@ -72,7 +72,7 @@ def etc_init():
     ) as request:
         # Check if SPI communication works
         TempLong = Etc_Read_Reg(request, BYTE_TEST, 4)
-	print(TempLong.LANLong)
+
 
 if __name__ == "__main__":
     while True:
