@@ -3,10 +3,10 @@ import gpiod
 
 from gpiod.line import Direction, Value
 
-LINE = 2
+LINE = 11
 
 with gpiod.request_lines(
-    "/dev/gpiochip0",
+    "/dev/gpiochip3",
     consumer="blink-example",
     config={
 	LINE: gpiod.LineSettings(
