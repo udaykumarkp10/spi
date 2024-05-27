@@ -163,6 +163,30 @@ WatchDog = False
 Operational = False
 
 
+chip_id = ctypes.c_uint32(0)
+
+etc_in_0 = ctypes.c_uint32(0)
+etc_in_1 = ctypes.c_uint32(0)
+etc_in_5 = ctypes.c_uint32(0)
+etc_in_6 = ctypes.c_uint32(0)
+
+# Float variables
+etc_in_2 = ctypes.c_float(0.0)
+etc_in_3 = ctypes.c_float(0.0)
+etc_in_4 = ctypes.c_float(0.0)
+etc_in_7 = ctypes.c_float(0.0)
+
+# Output variables (assuming they are also unsigned 32-bit integers and floats)
+etc_out_0 = ctypes.c_uint32(0)
+etc_out_1 = ctypes.c_float(0.0)
+etc_out_2 = ctypes.c_uint32(0)
+etc_out_3 = ctypes.c_uint32(0)
+etc_out_4 = ctypes.c_uint32(0)
+etc_out_5 = ctypes.c_uint32(0)
+etc_out_6 = ctypes.c_uint32(0)
+etc_out_7 = ctypes.c_uint32(0)
+
+
 class UWORD(Union):
     _fields_ = [("LANWord", c_uint16),                 # uint16_t LANWord
                 ("LANByte", c_uint8 * 2)]              # uint8_t LANByte[2]
@@ -312,6 +336,8 @@ def Etc_Write_Reg(address, DataOut):
     print("xfrbuf before filling: ", end="")
     for i in range(3):
         print("{:02X} ".format(xfrbuf[i]), end="")
+    print()
+    
     for i in range(4):
         xfrbuf[i+3] = Data.LANByte[i]       # Fill data bytes, lsb
     
@@ -324,6 +350,7 @@ def Etc_Write_Reg(address, DataOut):
     response = spi.transfer(xfrbuf_list)
 
     print("Response:", response)
+    print()
     
     # Transmit function
     #response = spi.xfer2(list(xfrbuf))  # Perform SPI transfer and receive response
@@ -346,7 +373,8 @@ def Etc_Read_Reg_Wait(address, length):
     TempLong.LANByte[3] = ECAT_CSR_BUSY
 
     # do while need to have a look
-    while TempLong.LANByte[3] & ECAT_CSR_BUSY:   # wait for command execution
+    TempLong.LANLong = Etc_Read_Reg(ECAT_CSR_CMD, 4)
+    while (TempLong.LANByte[3] & ECAT_CSR_BUSY):   # wait for command execution
         TempLong.LANLong = Etc_Read_Reg(ECAT_CSR_CMD, 4)
 
     TempLong.LANLong = Etc_Read_Reg(ECAT_CSR_DATA, length)     # read the requested register
@@ -373,7 +401,8 @@ def Etc_Write_Reg_Wait(address, DataOut):
     TempLong.LANByte[3] = ECAT_CSR_BUSY
 
     # do while need to have a look
-    while TempLong.LANByte[3] & ECAT_CSR_BUSY:
+    TempLong.LANLong = Etc_Read_Reg(ECAT_CSR_CMD, 4)
+    while (TempLong.LANByte[3] & ECAT_CSR_BUSY):
         TempLong.LANLong = Etc_Read_Reg(ECAT_CSR_CMD, 4)
 
 
@@ -388,10 +417,10 @@ def Etc_Read_Fifo():
     TempLong.LANLong = 0
 
     # Wait for data to be transferred from the output process ram to the read fifo
-    while True:
+    TempLong.LANLong = Etc_Read_Reg(ECAT_PRAM_RD_CMD, 4)
+
+    while (not (TempLong.LANByte[0] & PRAM_READ_AVAIL) || (TempLong.LANByte[1] != 8))
         TempLong.LANLong = Etc_Read_Reg(ECAT_PRAM_RD_CMD, 4)
-        if TempLong.LANByte[0] & PRAM_READ_AVAIL and TempLong.LANByte[1] == 8:
-            break
 
     xfrbuf[0] = COMM_SPI_READ                       # SPI read command
     xfrbuf[1] = 0x00                               # address of the read
@@ -418,11 +447,11 @@ def Etc_Write_Fifo():
     TempLong.LANLong = 0
 
     # Wait for fifo to have available space for data to be written
-    while True:
-        TempLong.LANLong = Etc_Read_Reg(ECAT_PRAM_WR_CMD, 4)
-        if TempLong.LANByte[0] & PRAM_WRITE_AVAIL and TempLong.LANByte[1] >= 8:
-            break
 
+    TempLong.LANLong = Etc_Read_Reg(ECAT_PRAM_WR_CMD, 4)
+
+    while( not (TempLong.LANByte[0] & PRAM_WRITE_AVAIL) || (TempLong.LANByte[1] < 8))
+    
     xfrbuf[0] = COMM_SPI_WRITE              # SPI write command
     xfrbuf[1] = 0x00                        # address of the write fifo
     xfrbuf[2] = 0x20                        # MsByte first
@@ -434,19 +463,17 @@ def Etc_Write_Fifo():
     response = spi.transfer(xfrbuf)
 
 
-"""
-
 # initialize / check the etc interface on SPI, return true if initialization is ok
 
 def etc_init():
     TempLong = ULONG()
 
     Etc_Write_Reg(RESET_CTL, (DIGITAL_RST & ETHERCAT_RST)) # Need to check "AND" Operator
-    # time.sleep(0.3)
+    time.sleep(0.1)
     TempLong.LANLong = Etc_Read_Reg(BYTE_TEST, 4)          # read test register
 
     # Print the value of TempLong
-    # print("Value of TempLong:", TempLong.LANLong)
+    print("Value of TempLong:", TempLong.LANLong)
 
     if TempLong.LANLong != 0x87654321:
         print("Bad response received from Etc Test command, data received =", TempLong.LANLong)
@@ -475,6 +502,8 @@ def etc_init():
     print()
     print(TempLong.LANLong)
 
+
+"""
 
 # one scan of etc
 
@@ -521,11 +550,32 @@ def etc_scan():
 
 def main():
     # Initialize EtherCAT interface
-    if not etc_init():
-        print("EtherCAT initialization failed")
-        return
+
+    etc_init()
+    chip_id = Etc_Read_Reg(ID_REV, 4)
+    print(chip_id)
+    
+    while (True):
+        etc_scan()
+        etc_out_0 = Etc_Buffer_Out.LANLong[0];
+		etc_out_1 = Etc_Buffer_Out.LANFloat[1];
+		etc_out_2 = Etc_Buffer_Out.LANLong[2];
+		etc_out_3 = Etc_Buffer_Out.LANLong[3];
+		etc_out_4 = Etc_Buffer_Out.LANLong[4];
+		etc_out_5 = Etc_Buffer_Out.LANLong[5];
+		etc_out_6 = Etc_Buffer_Out.LANLong[6];
+		etc_out_7 = Etc_Buffer_Out.LANLong[7];
+
+		Etc_Buffer_In.LANLong[0] = etc_in_0;
+		Etc_Buffer_In.LANLong[1] = etc_in_1;
+		Etc_Buffer_In.LANFloat[2] = etc_in_2;
+		Etc_Buffer_In.LANFloat[3] = etc_in_3;
+		Etc_Buffer_In.LANFloat[4] = etc_in_4;
+		Etc_Buffer_In.LANLong[5] = etc_in_5;
+		Etc_Buffer_In.LANLong[6] = etc_in_6;
+		Etc_Buffer_In.LANFloat[7] = etc_in_7;
+        time.sleep(0.1)
 
 if __name__ == "__main__":
-    while True:
-        main()  # Call the main function
-        time.sleep(0.2)  # Sleep for 2 seconds before running again
+    main()  # Call the main function
+    time.sleep(0.2)  # Sleep for 2 seconds before running again
