@@ -572,7 +572,7 @@ def main():
 	Etc_Buffer_In.LANLong[5] = etc_in_5;
 	Etc_Buffer_In.LANLong[6] = etc_in_6;
 	Etc_Buffer_In.LANFloat[7] = etc_in_7;
-        time.sleep(0.1)
+        time.sleep(0.2)
 
 if __name__ == "__main__":
     main()  # Call the main function
