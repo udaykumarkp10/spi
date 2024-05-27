@@ -477,13 +477,11 @@ def etc_init():
 
     if TempLong.LANLong != 0x87654321:
         print("Bad response received from Etc Test command, data received =", TempLong.LANLong)
-        return False
 
     TempLong.LANLong = Etc_Read_Reg(HW_CFG, 4)        # check also the READY flag
 
     if((TempLong.LANLong & READY) == 0 ):
         print("Ready not received from Etc HW Cfg, data received =", TempLong.LANLong)
-        return False
 
     print("Etc Test Command succeeded\n")
 
@@ -558,22 +556,22 @@ def main():
     while (True):
         etc_scan()
         etc_out_0 = Etc_Buffer_Out.LANLong[0];
-		etc_out_1 = Etc_Buffer_Out.LANFloat[1];
-		etc_out_2 = Etc_Buffer_Out.LANLong[2];
-		etc_out_3 = Etc_Buffer_Out.LANLong[3];
-		etc_out_4 = Etc_Buffer_Out.LANLong[4];
-		etc_out_5 = Etc_Buffer_Out.LANLong[5];
-		etc_out_6 = Etc_Buffer_Out.LANLong[6];
-		etc_out_7 = Etc_Buffer_Out.LANLong[7];
+	etc_out_1 = Etc_Buffer_Out.LANFloat[1];
+	etc_out_2 = Etc_Buffer_Out.LANLong[2];
+	etc_out_3 = Etc_Buffer_Out.LANLong[3];
+	etc_out_4 = Etc_Buffer_Out.LANLong[4];
+	etc_out_5 = Etc_Buffer_Out.LANLong[5];
+	etc_out_6 = Etc_Buffer_Out.LANLong[6];
+	etc_out_7 = Etc_Buffer_Out.LANLong[7];
 
-		Etc_Buffer_In.LANLong[0] = etc_in_0;
-		Etc_Buffer_In.LANLong[1] = etc_in_1;
-		Etc_Buffer_In.LANFloat[2] = etc_in_2;
-		Etc_Buffer_In.LANFloat[3] = etc_in_3;
-		Etc_Buffer_In.LANFloat[4] = etc_in_4;
-		Etc_Buffer_In.LANLong[5] = etc_in_5;
-		Etc_Buffer_In.LANLong[6] = etc_in_6;
-		Etc_Buffer_In.LANFloat[7] = etc_in_7;
+	Etc_Buffer_In.LANLong[0] = etc_in_0;
+	Etc_Buffer_In.LANLong[1] = etc_in_1;
+	Etc_Buffer_In.LANFloat[2] = etc_in_2;
+	Etc_Buffer_In.LANFloat[3] = etc_in_3;
+	Etc_Buffer_In.LANFloat[4] = etc_in_4;
+	Etc_Buffer_In.LANLong[5] = etc_in_5;
+	Etc_Buffer_In.LANLong[6] = etc_in_6;
+	Etc_Buffer_In.LANFloat[7] = etc_in_7;
         time.sleep(0.1)
 
 if __name__ == "__main__":
