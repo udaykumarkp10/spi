@@ -576,4 +576,3 @@ def main():
 
 if __name__ == "__main__":
     main()  # Call the main function
-    time.sleep(0.2)  # Sleep for 2 seconds before running again
