@@ -2,7 +2,7 @@ import periphery
 import time
 
 # Initialize SPI communication
-spi = periphery.SPI("/dev/spidev0.0")
+spi = periphery.SPI("/dev/spidev2.0")
 
 # Set SPI parameters (optional)
 spi.frequency = 500000  # Set SPI frequency (max speed depends on your hardware and SD card)
