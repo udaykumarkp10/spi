@@ -1,8 +1,8 @@
 import os
 from periphery import SPI
 
-# Initialize SPI interface
-spi = SPI("/dev/spidev2.0")
+# Initialize SPI interface with mode and max_speed
+spi = SPI("/dev/spidev2.0", mode=0, max_speed=500000)
 
 # Mount SD card filesystem
 os.system("mount /dev/mmcblk0p1 /mnt/sdcard")
