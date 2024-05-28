@@ -10,19 +10,23 @@ if not os.path.exists(mount_point):
     os.makedirs(mount_point)
 
 # Mount SD card filesystem
-os.system("mount /dev/mmcblk0p1 " + mount_point)
+mount_command = "mount /dev/mmcblk0p1 " + mount_point
+mount_status = os.system(mount_command)
 
-# Write data to a file
-with open(os.path.join(mount_point, "test.txt"), "w") as f:
-    f.write("Hello, SD card what's up!")
+if mount_status == 0:
+    # Write data to a file
+    with open(os.path.join(mount_point, "test.txt"), "w") as f:
+        f.write("Hello, SD card what's up!\n")
 
-# Read data from the file
-with open(os.path.join(mount_point, "test.txt"), "r") as f:
-    data = f.read()
-    print("Data read from file:", data)
+    # Read data from the file
+    with open(os.path.join(mount_point, "test.txt"), "r") as f:
+        data = f.read()
+        print("Data read from file:", data)
 
-# Unmount SD card filesystem
-os.system("umount " + mount_point)
+    # Unmount SD card filesystem
+    os.system("umount " + mount_point)
+else:
+    print("Error: Failed to mount SD card filesystem")
 
 # Close SPI interface
 spi.close()
