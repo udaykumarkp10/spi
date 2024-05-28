@@ -2,20 +2,15 @@ import periphery
 import time
 
 # Initialize SPI communication
-spi = periphery.SPI("/dev/spidev2.0")
-
-# Set SPI parameters (optional)
-spi.frequency = 500000  # Set SPI frequency (max speed depends on your hardware and SD card)
-spi.mode = 0            # Set SPI mode (0, 1, 2, or 3)
-spi.bits_per_word = 8  # Set number of bits per word
+spi = periphery.SPI("/dev/spidev2.0", mode=0, max_speed=500000)
 
 # Function to send data over SPI
 def spi_send(data):
-    spi.write(data)
+    spi.transfer(data)
 
 # Function to receive data over SPI
 def spi_receive(length):
-    return spi.read(length)
+    return spi.transfer([0x00] * length)
 
 # Example usage
 def main():
