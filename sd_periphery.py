@@ -2,7 +2,7 @@ import os
 from periphery import SPI
 
 # Initialize SPI interface
-spi = periphery.SPI("/dev/spidev2.0", mode=0, max_speed=500000)
+spi = SPI("/dev/spidev1.0")
 
 # Mount SD card filesystem
 os.system("mount /dev/mmcblk0p1 /mnt/sdcard")
