@@ -1,32 +1,23 @@
-import periphery
-import time
+import os
+from periphery import SPI
 
-# Initialize SPI communication
-spi = periphery.SPI("/dev/spidev2.0", mode=0, max_speed=500000)
+# Initialize SPI interface
+spi = SPI("/dev/spidev2.0")
 
-# Function to send data over SPI
-def spi_send(data):
-    spi.transfer(data)
+# Mount SD card filesystem
+os.system("mount /dev/mmcblk0p1 /mnt/sdcard")
 
-# Function to receive data over SPI
-def spi_receive(length):
-    return spi.transfer([0x00] * length)
+# Write data to a file
+with open("/mnt/sdcard/test.txt", "w") as f:
+    f.write("Hello, SD card!")
 
-# Example usage
-def main():
-    # Example data to send
-    data_to_send = [0xAA, 0xBB, 0xCC, 0xDD]
+# Read data from the file
+with open("/mnt/sdcard/test.txt", "r") as f:
+    data = f.read()
+    print("Data read from file:", data)
 
-    # Send data
-    spi_send(data_to_send)
+# Unmount SD card filesystem
+os.system("umount /mnt/sdcard")
 
-    # Receive data (assuming we want to receive the same number of bytes as sent)
-    received_data = spi_receive(len(data_to_send))
-    print("Received data:", received_data)
-
-if __name__ == "__main__":
-    try:
-        main()
-    finally:
-        # Close SPI communication
-        spi.close()
+# Close SPI interface
+spi.close()
