@@ -14,7 +14,7 @@ os.system("mount /dev/mmcblk0p1 " + mount_point)
 
 # Write data to a file
 with open(os.path.join(mount_point, "test.txt"), "w") as f:
-    f.write("Hello, SD card! what's up")
+    f.write("Hello, SD card! what")
 
 # Read data from the file
 with open(os.path.join(mount_point, "test.txt"), "r") as f:
