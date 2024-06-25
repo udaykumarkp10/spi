@@ -447,7 +447,7 @@ def Etc_Write_Fifo():
 def etc_init():
     TempLong = ULONG()
 
-    TempLong.LANLong = Etc_Read_Reg(ID_REV, 4)          # read test register
+    TempLong.LANLong = Etc_Read_Reg(BYTE_TEST, 4)          # read test register
 
     print("Value of TempLong:", TempLong.LANLong)
  
