@@ -189,7 +189,7 @@ Etc_Buffer_In = PROCBUFFER()
 # SPI setup
 spi = spidev.SpiDev()
 spi.open(2, 0)  # Assuming SPI bus 0, device 0
-spi.max_speed_hz = 30000000  # Adjust as needed
+spi.max_speed_hz = 3000000  # Adjust as needed
 spi.mode = 3
 
 # Additional settings
