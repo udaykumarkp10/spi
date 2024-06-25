@@ -4,7 +4,7 @@ import spidev
 ID_REV = 0x0000
 
 class LAN9252:
-    def __init__(self, bus=0, device=0, max_speed_hz=50000):
+    def __init__(self, bus=2, device=0, max_speed_hz=50000):
         self.spi = spidev.SpiDev()
         self.spi.open(bus, device)
         self.spi.max_speed_hz = max_speed_hz
