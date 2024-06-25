@@ -503,7 +503,11 @@ def main():
         print("EtherCAT initialization failed")
         return
 
+# if __name__ == "__main__":
+#     while True:
+#         main()  # Call the main function
+#         time.sleep(0.1)  # Sleep for 2 seconds before running again
+
+
 if __name__ == "__main__":
-    while True:
-        main()  # Call the main function
-        time.sleep(0.1)  # Sleep for 2 seconds before running again
+    main()  # Call the main function once
