@@ -450,7 +450,7 @@ def etc_init():
     TempLong.LANLong = Etc_Read_Reg(BYTE_TEST, 4)          # read test register
 
     print("Value of TempLong:", TempLong.LANLong)
-    return true
+    return True
  
 
 # one scan of etc
