@@ -8,7 +8,7 @@ AL_STATUS_REG_0 = 0x0130
 ESM_OP = 0x08
 
 class LAN9252:
-    def __init__(self, bus=2, device=0, max_speed_hz=50000):
+    def __init__(self, bus=2, device=0, max_speed_hz=3000000):
         self.spi = spidev.SpiDev()
         self.spi.open(bus, device)
         self.spi.max_speed_hz = max_speed_hz
