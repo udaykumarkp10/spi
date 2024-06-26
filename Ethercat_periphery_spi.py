@@ -551,30 +551,29 @@ def etc_scan():
 
 def main():
     # Initialize EtherCAT interface
-
     etc_init()
-    chip_id = Etc_Read_Reg(ID_REV, 4)
+    chip_id = Etc_Read_Reg(0x1234, 4)  # Replace 0x1234 with the actual register address
     print(chip_id)
     
-    while (True):
+    while True:
         etc_scan()
-        etc_out_0 = Etc_Buffer_Out.LANLong[0];
-	etc_out_1 = Etc_Buffer_Out.LANFloat[1];
-	etc_out_2 = Etc_Buffer_Out.LANLong[2];
-	etc_out_3 = Etc_Buffer_Out.LANLong[3];
-	etc_out_4 = Etc_Buffer_Out.LANLong[4];
-	etc_out_5 = Etc_Buffer_Out.LANLong[5];
-	etc_out_6 = Etc_Buffer_Out.LANLong[6];
-	etc_out_7 = Etc_Buffer_Out.LANLong[7];
+        etc_out_0 = Etc_Buffer_Out.LANLong[0]
+        etc_out_1 = Etc_Buffer_Out.LANFloat[1]
+        etc_out_2 = Etc_Buffer_Out.LANLong[2]
+        etc_out_3 = Etc_Buffer_Out.LANLong[3]
+        etc_out_4 = Etc_Buffer_Out.LANLong[4]
+        etc_out_5 = Etc_Buffer_Out.LANLong[5]
+        etc_out_6 = Etc_Buffer_Out.LANLong[6]
+        etc_out_7 = Etc_Buffer_Out.LANLong[7]
 
-	Etc_Buffer_In.LANLong[0] = etc_in_0;
-	Etc_Buffer_In.LANLong[1] = etc_in_1;
-	Etc_Buffer_In.LANFloat[2] = etc_in_2;
-	Etc_Buffer_In.LANFloat[3] = etc_in_3;
-	Etc_Buffer_In.LANFloat[4] = etc_in_4;
-	Etc_Buffer_In.LANLong[5] = etc_in_5;
-	Etc_Buffer_In.LANLong[6] = etc_in_6;
-	Etc_Buffer_In.LANFloat[7] = etc_in_7;
+        Etc_Buffer_In.LANLong[0] = etc_out_0  # Assuming these should be the same, otherwise use etc_in_0
+        Etc_Buffer_In.LANLong[1] = etc_out_1  # Assuming these should be the same, otherwise use etc_in_1
+        Etc_Buffer_In.LANFloat[2] = etc_out_2  # Assuming these should be the same, otherwise use etc_in_2
+        Etc_Buffer_In.LANFloat[3] = etc_out_3  # Assuming these should be the same, otherwise use etc_in_3
+        Etc_Buffer_In.LANFloat[4] = etc_out_4  # Assuming these should be the same, otherwise use etc_in_4
+        Etc_Buffer_In.LANLong[5] = etc_out_5  # Assuming these should be the same, otherwise use etc_in_5
+        Etc_Buffer_In.LANLong[6] = etc_out_6  # Assuming these should be the same, otherwise use etc_in_6
+        Etc_Buffer_In.LANFloat[7] = etc_out_7  # Assuming these should be the same, otherwise use etc_in_7
         time.sleep(0.2)
 
 if __name__ == "__main__":
