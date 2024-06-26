@@ -452,9 +452,9 @@ def Etc_Write_Fifo():
     TempLong.LANLong = Etc_Read_Reg(ECAT_PRAM_WR_CMD, 4)
 
     #while( not (TempLong.LANByte[0] & PRAM_WRITE_AVAIL) || (TempLong.LANByte[1] < 8))
-    while (not (TempLong.LANByte[0] & PRAM_WRITE_AVAIL) or (TempLong.LANByte[1] < 8)):  # Corrected logical OR operator and added colon
-	TempLong.LANLong = Etc_Read_Reg(ECAT_PRAM_WR_CMD, 4)
-	    
+    while (not (TempLong.LANByte[0] & PRAM_WRITE_AVAIL) or (TempLong.LANByte[1] < 8)):
+	    TempLong.LANLong = Etc_Read_Reg(ECAT_PRAM_WR_CMD, 4)
+	      
     xfrbuf[0] = COMM_SPI_WRITE              # SPI write command
     xfrbuf[1] = 0x00                        # address of the write fifo
     xfrbuf[2] = 0x20                        # MsByte first
