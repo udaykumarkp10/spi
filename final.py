@@ -196,10 +196,12 @@ class ULONG(Union):
                 ("LANWord", c_uint16 * 2),             # uint16_t LANWord[2]
                 ("LANByte", c_uint8 * 4)]             # uint8_t LANByte[4]
 
-class PROCBUFFER(Union):
-    _fields_ = [("LANByte", c_uint8 * 32),            # uint8_t LANByte[32]
-                ("LANLong", c_uint32 * 8)]            # uint32_t LANLong[8]
-		("LANFloat", ctypes.c_float * 8)]    # float LANFloat[8]
+class PROCBUFFER(ctypes.Union):
+    _fields_ = [("LANByte", ctypes.c_uint8 * 32),    # uint8_t LANByte[32]
+                ("LANLong", ctypes.c_uint32 * 8),    # uint32_t LANLong[8]
+                ("LANFloat", ctypes.c_float * 8)]    # float LANFloat[8]
+
+
 
 # Define external buffer instances
 Etc_Buffer_Out = PROCBUFFER()
