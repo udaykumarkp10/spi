@@ -580,7 +580,7 @@ def main():
         Etc_Buffer_In.LANLong[6] = 7  
         Etc_Buffer_In.LANFloat[7] = 8
 	
-        time.sleep(0.2)
+        time.sleep(2)
 
 if __name__ == "__main__":
     main()  # Call the main function
