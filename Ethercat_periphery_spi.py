@@ -419,7 +419,8 @@ def Etc_Read_Fifo():
     # Wait for data to be transferred from the output process ram to the read fifo
     TempLong.LANLong = Etc_Read_Reg(ECAT_PRAM_RD_CMD, 4)
 
-    while (not (TempLong.LANByte[0] & PRAM_READ_AVAIL) || (TempLong.LANByte[1] != 8))
+    #while (not (TempLong.LANByte[0] & PRAM_READ_AVAIL) || (TempLong.LANByte[1] != 8))
+    while (not (TempLong.LANByte[0] & PRAM_READ_AVAIL) or (TempLong.LANByte[1] != 8)):  # Corrected logical OR operator
         TempLong.LANLong = Etc_Read_Reg(ECAT_PRAM_RD_CMD, 4)
 
     xfrbuf[0] = COMM_SPI_READ                       # SPI read command
