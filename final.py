@@ -199,6 +199,7 @@ class ULONG(Union):
 class PROCBUFFER(Union):
     _fields_ = [("LANByte", c_uint8 * 32),            # uint8_t LANByte[32]
                 ("LANLong", c_uint32 * 8)]            # uint32_t LANLong[8]
+		("LANFloat", ctypes.c_float * 8)]    # float LANFloat[8]
 
 # Define external buffer instances
 Etc_Buffer_Out = PROCBUFFER()
@@ -568,14 +569,14 @@ def main():
         etc_out_6 = Etc_Buffer_Out.LANLong[6]
         etc_out_7 = Etc_Buffer_Out.LANLong[7]
 
-        Etc_Buffer_In.LANLong[0] = etc_out_0  # Assuming these should be the same, otherwise use etc_in_0
-        Etc_Buffer_In.LANLong[1] = etc_out_1  # Assuming these should be the same, otherwise use etc_in_1
-        Etc_Buffer_In.LANFloat[2] = etc_out_2  # Assuming these should be the same, otherwise use etc_in_2
-        Etc_Buffer_In.LANFloat[3] = etc_out_3  # Assuming these should be the same, otherwise use etc_in_3
-        Etc_Buffer_In.LANFloat[4] = etc_out_4  # Assuming these should be the same, otherwise use etc_in_4
-        Etc_Buffer_In.LANLong[5] = etc_out_5  # Assuming these should be the same, otherwise use etc_in_5
-        Etc_Buffer_In.LANLong[6] = etc_out_6  # Assuming these should be the same, otherwise use etc_in_6
-        Etc_Buffer_In.LANFloat[7] = etc_out_7  # Assuming these should be the same, otherwise use etc_in_7
+        Etc_Buffer_In.LANLong[0] = etc_out_0 
+        Etc_Buffer_In.LANLong[1] = etc_out_1 
+        Etc_Buffer_In.LANFloat[2] = etc_out_2 
+        Etc_Buffer_In.LANFloat[3] = etc_out_3
+        Etc_Buffer_In.LANFloat[4] = etc_out_4 
+        Etc_Buffer_In.LANLong[5] = etc_out_5  
+        Etc_Buffer_In.LANLong[6] = etc_out_6  
+        Etc_Buffer_In.LANFloat[7] = etc_out_7
         time.sleep(0.2)
 
 if __name__ == "__main__":
