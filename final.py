@@ -572,7 +572,7 @@ def main():
         etc_out_7 = Etc_Buffer_Out.LANLong[7]
 
         Etc_Buffer_In.LANLong[0] = etc_out_0 
-        Etc_Buffer_In.LANLong[1] = etc_out_1 
+        Etc_Buffer_In.LANFloat[1] = etc_out_1 
         Etc_Buffer_In.LANFloat[2] = etc_out_2 
         Etc_Buffer_In.LANFloat[3] = etc_out_3
         Etc_Buffer_In.LANFloat[4] = etc_out_4 
