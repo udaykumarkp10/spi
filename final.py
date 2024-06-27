@@ -572,45 +572,26 @@ def main():
     
     while True:
         etc_scan()
-	# Read data from Etc_Buffer_Out (data sent from TwinCAT)
-        etc_out_0 = Etc_Buffer_Out.LANLong[4]
-        etc_out_1 = Etc_Buffer_Out.LANLong[5]
-        etc_out_2 = Etc_Buffer_Out.LANLong[6]
-        etc_out_3 = Etc_Buffer_Out.LANLong[7]
-	etc_out_4 = Etc_Buffer_In.LANLong[5]
         
-        # Print received data
-        print(f"Received from TwinCAT: {etc_out_0}, {etc_out_1}, {etc_out_2}, {etc_out_3}, {etc_out_4}")
+        etc_out_0 = Etc_Buffer_Out.LANLong[0]
+        etc_out_1 = Etc_Buffer_Out.LANLong[1]
+        etc_out_2 = Etc_Buffer_Out.LANLong[2]
+        etc_out_3 = Etc_Buffer_Out.LANLong[3]
+        etc_out_4 = Etc_Buffer_Out.LANLong[4]
+        etc_out_5 = Etc_Buffer_Out.LANLong[5]
+        etc_out_6 = Etc_Buffer_Out.LANLong[6]
+        etc_out_7 = Etc_Buffer_Out.LANLong[7]
 
-	# Write data to Etc_Buffer_In (data sent to TwinCAT)
         Etc_Buffer_In.LANLong[0] = 1
         Etc_Buffer_In.LANLong[1] = 2
         Etc_Buffer_In.LANLong[2] = 3
         Etc_Buffer_In.LANLong[3] = 4
-        
-        time.sleep(0.3)  # Wait for 2 seconds before next iteration
-	
+        Etc_Buffer_In.LANLong[4] = 5
+        Etc_Buffer_In.LANLong[5] = 6
+        Etc_Buffer_In.LANLong[6] = 7  
+        Etc_Buffer_In.LANLong[7] = 8
 
-
-
-
-        # etc_out_0 = Etc_Buffer_Out.LANLong[0]
-        # etc_out_1 = Etc_Buffer_Out.LANLong[1]
-        # etc_out_2 = Etc_Buffer_Out.LANLong[2]
-        # etc_out_3 = Etc_Buffer_Out.LANLong[3]
-        # etc_out_4 = Etc_Buffer_Out.LANLong[4]
-        # etc_out_5 = Etc_Buffer_Out.LANLong[5]
-        # etc_out_6 = Etc_Buffer_Out.LANLong[6]
-        # etc_out_7 = Etc_Buffer_Out.LANLong[7]
-
-        # Etc_Buffer_In.LANLong[0] = 1
-        # Etc_Buffer_In.LANLong[1] = 2
-        # Etc_Buffer_In.LANLong[2] = 3
-        # Etc_Buffer_In.LANLong[3] = 4
-        # Etc_Buffer_In.LANLong[4] = 5
-        # Etc_Buffer_In.LANLong[5] = 6
-        # Etc_Buffer_In.LANLong[6] = 7  
-        # Etc_Buffer_In.LANLong[7] = 8
+	time.sleep(0.3)  # Wait for 0.3 seconds before next iteration
 
 
 if __name__ == "__main__":
