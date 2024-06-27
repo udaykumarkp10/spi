@@ -577,9 +577,11 @@ def main():
         etc_out_1 = Etc_Buffer_Out.LANLong[5]
         etc_out_2 = Etc_Buffer_Out.LANLong[6]
         etc_out_3 = Etc_Buffer_Out.LANLong[7]
+
+	etc_out_4 = Etc_Buffer_In.LANLong[5]
         
         # Print received data
-        print(f"Received from TwinCAT: {etc_out_0}, {etc_out_1}, {etc_out_2}, {etc_out_3}")
+        print(f"Received from TwinCAT: {etc_out_0}, {etc_out_1}, {etc_out_2}, {etc_out_3}, {etc_out_4}")
 
 	# Write data to Etc_Buffer_In (data sent to TwinCAT)
         Etc_Buffer_In.LANLong[0] = 1
