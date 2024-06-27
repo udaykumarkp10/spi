@@ -573,10 +573,10 @@ def main():
     while True:
         etc_scan()
 	# Read data from Etc_Buffer_Out (data sent from TwinCAT)
-        etc_out_0 = Etc_Buffer_Out.LANLong[0]
-        etc_out_1 = Etc_Buffer_Out.LANLong[1]
-        etc_out_2 = Etc_Buffer_Out.LANLong[2]
-        etc_out_3 = Etc_Buffer_Out.LANLong[3]
+        etc_out_0 = Etc_Buffer_Out.LANLong[4]
+        etc_out_1 = Etc_Buffer_Out.LANLong[5]
+        etc_out_2 = Etc_Buffer_Out.LANLong[6]
+        etc_out_3 = Etc_Buffer_Out.LANLong[7]
         
         # Print received data
         print(f"Received from TwinCAT: {etc_out_0}, {etc_out_1}, {etc_out_2}, {etc_out_3}")
