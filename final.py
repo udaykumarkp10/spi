@@ -199,7 +199,7 @@ class ULONG(Union):
 class PROCBUFFER(ctypes.Union):
     _fields_ = [("LANByte", ctypes.c_uint8 * 32),    # uint8_t LANByte[32]
                 ("LANLong", ctypes.c_uint32 * 8),    # uint32_t LANLong[8]
-                ("LANFloat", ctypes.c_float * 8)]    # float LANFloat[8]
+                # ("LANFloat", ctypes.c_float * 8)]    # float LANFloat[8]
 
 
 
@@ -563,7 +563,7 @@ def main():
     while True:
         etc_scan()
         etc_out_0 = Etc_Buffer_Out.LANLong[0]
-        etc_out_1 = Etc_Buffer_Out.LANFloat[1]
+        etc_out_1 = Etc_Buffer_Out.LANLong[1]
         etc_out_2 = Etc_Buffer_Out.LANLong[2]
         etc_out_3 = Etc_Buffer_Out.LANLong[3]
         etc_out_4 = Etc_Buffer_Out.LANLong[4]
@@ -572,13 +572,13 @@ def main():
         etc_out_7 = Etc_Buffer_Out.LANLong[7]
 
         Etc_Buffer_In.LANLong[0] = 1
-        Etc_Buffer_In.LANFloat[1] = 2.0
-        Etc_Buffer_In.LANFloat[2] = 3.0
-        Etc_Buffer_In.LANFloat[3] = 4.0
-        Etc_Buffer_In.LANFloat[4] = 5.0
+        Etc_Buffer_In.LANLong[1] = 2
+        Etc_Buffer_In.LANLong[2] = 3
+        Etc_Buffer_In.LANLong[3] = 4
+        Etc_Buffer_In.LANLong[4] = 5
         Etc_Buffer_In.LANLong[5] = 6
         Etc_Buffer_In.LANLong[6] = 7  
-        Etc_Buffer_In.LANFloat[7] = 8.0
+        Etc_Buffer_In.LANLong[7] = 8
 	
         time.sleep(2)
 
