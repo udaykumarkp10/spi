@@ -577,7 +577,6 @@ def main():
         etc_out_1 = Etc_Buffer_Out.LANLong[5]
         etc_out_2 = Etc_Buffer_Out.LANLong[6]
         etc_out_3 = Etc_Buffer_Out.LANLong[7]
-
 	etc_out_4 = Etc_Buffer_In.LANLong[5]
         
         # Print received data
