@@ -308,8 +308,6 @@ def Etc_Write_Reg(address, DataOut):
     Addr.LANWord = address
     Data.LANLong = DataOut
 
-    print()
-
     # print("Address:", Addr.LANWord)  # Print the value of Addr.LANWord
     # print("Data:", Data.LANLong)     # Print the value of Data.LANLong
 
@@ -334,8 +332,8 @@ def Etc_Write_Reg(address, DataOut):
 
     response = spi.xfer2(xfrbuf_list)
 
-    print("Response:", response)
-    print()
+    # print("Response:", response)
+    # print()
     
     # Transmit function
     #response = spi.xfer2(list(xfrbuf))  # Perform SPI xfer2 and receive response
