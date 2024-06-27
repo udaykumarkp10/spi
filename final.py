@@ -454,22 +454,22 @@ def Etc_Write_Fifo():
 def etc_init():
     TempLong = ULONG()
 
-    Etc_Write_Reg(RESET_CTL, (DIGITAL_RST & ETHERCAT_RST)) # Need to check "AND" Operator
+    Etc_Write_Reg(RESET_CTL, (DIGITAL_RST & ETHERCAT_RST))  # Need to check "AND" Operator
     time.sleep(0.1)
-    TempLong.LANLong = Etc_Read_Reg(BYTE_TEST, 4)          # read test register
+    TempLong.LANLong = Etc_Read_Reg(BYTE_TEST, 4)  # read test register
 
     # Print the value of TempLong
     # print("Value of TempLong:", TempLong.LANLong)
 
     if TempLong.LANLong != 0x87654321:
         print("Bad response received from Etc Test command, data received =", TempLong.LANLong)
-	return False
+        return False
 
-    TempLong.LANLong = Etc_Read_Reg(HW_CFG, 4)        # check also the READY flag
+    TempLong.LANLong = Etc_Read_Reg(HW_CFG, 4)  # check also the READY flag
 
-    if((TempLong.LANLong & READY) == 0 ):
+    if (TempLong.LANLong & READY) == 0:
         print("Ready not received from Etc HW Cfg, data received =", TempLong.LANLong)
-	return False
+        return False
 
     print("Etc Test Command succeeded\n")
 
@@ -478,6 +478,36 @@ def etc_init():
     print(chip_id)
 
     return True
+
+
+
+# def etc_init():
+#     TempLong = ULONG()
+
+#     Etc_Write_Reg(RESET_CTL, (DIGITAL_RST & ETHERCAT_RST)) # Need to check "AND" Operator
+#     time.sleep(0.1)
+#     TempLong.LANLong = Etc_Read_Reg(BYTE_TEST, 4)          # read test register
+
+#     # Print the value of TempLong
+#     # print("Value of TempLong:", TempLong.LANLong)
+
+#     if TempLong.LANLong != 0x87654321:
+#         print("Bad response received from Etc Test command, data received =", TempLong.LANLong)
+# 	return False
+
+#     TempLong.LANLong = Etc_Read_Reg(HW_CFG, 4)        # check also the READY flag
+
+#     if((TempLong.LANLong & READY) == 0 ):
+#         print("Ready not received from Etc HW Cfg, data received =", TempLong.LANLong)
+# 	return False
+
+#     print("Etc Test Command succeeded\n")
+
+#     print("EtherCAT Chip ID = ", end="")
+#     chip_id = Etc_Read_Reg(ID_REV, 4)  # Assuming Etc_Read_Reg is a function that returns the chip ID
+#     print(chip_id)
+
+#     return True
 
 """
 
