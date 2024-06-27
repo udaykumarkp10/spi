@@ -459,15 +459,17 @@ def etc_init():
     TempLong.LANLong = Etc_Read_Reg(BYTE_TEST, 4)          # read test register
 
     # Print the value of TempLong
-    print("Value of TempLong:", TempLong.LANLong)
+    # print("Value of TempLong:", TempLong.LANLong)
 
     if TempLong.LANLong != 0x87654321:
         print("Bad response received from Etc Test command, data received =", TempLong.LANLong)
+	return False
 
     TempLong.LANLong = Etc_Read_Reg(HW_CFG, 4)        # check also the READY flag
 
     if((TempLong.LANLong & READY) == 0 ):
         print("Ready not received from Etc HW Cfg, data received =", TempLong.LANLong)
+	return False
 
     print("Etc Test Command succeeded\n")
 
