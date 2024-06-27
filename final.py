@@ -590,9 +590,8 @@ def main():
         Etc_Buffer_In.LANLong[5] = 6
         Etc_Buffer_In.LANLong[6] = 7  
         Etc_Buffer_In.LANLong[7] = 8
-
-	time.sleep(0.3)  # Wait for 0.3 seconds before next iteration
-
-
+	    
+	time.sleep(0.3)
+	    
 if __name__ == "__main__":
     main()  # Call the main function
