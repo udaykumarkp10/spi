@@ -564,16 +564,16 @@ def etc_scan():
 
     return Status
 
+
 def main():
     # Initialize EtherCAT interface
     etc_init()
-    
     # Read EtherCAT chip ID
     chip_id = Etc_Read_Reg(ID_REV, 4)
     print("EtherCAT Chip ID:", chip_id)
     
     while True:
-        # Scan for EtherCAT data
+        # Simulate scanning for EtherCAT data (replace with actual scan function)
         etc_scan()
         
         # Read data from Etc_Buffer_Out (data sent from TwinCAT)
