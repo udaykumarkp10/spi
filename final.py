@@ -567,7 +567,7 @@ def etc_scan():
 def main():
     # Initialize EtherCAT interface
     etc_init()
-    chip_id = Etc_Read_Reg(0x1234, 4)  # Replace 0x1234 with the actual register address
+    chip_id = Etc_Read_Reg(ID_REV, 4)  # Replace 0x1234 with the actual register address
     print(chip_id)
     
     while True:
