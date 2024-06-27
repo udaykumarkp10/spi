@@ -572,12 +572,12 @@ def main():
         etc_out_7 = Etc_Buffer_Out.LANLong[7]
 
         Etc_Buffer_In.LANLong[0] = 1 
-        Etc_Buffer_In.LANFloat[1] = 2 
-        Etc_Buffer_In.LANFloat[2] = 3 
-        Etc_Buffer_In.LANFloat[3] = 4
-        Etc_Buffer_In.LANFloat[4] = 5 
-        Etc_Buffer_In.LANLong[5] = 6  
-        Etc_Buffer_In.LANLong[6] = 7  
+        Etc_Buffer_In.LANFloat[1] = 1 
+        Etc_Buffer_In.LANFloat[2] = 1
+        Etc_Buffer_In.LANFloat[3] = 1
+        Etc_Buffer_In.LANFloat[4] = 1
+        Etc_Buffer_In.LANLong[5] = 1 
+        Etc_Buffer_In.LANLong[6] = 1  
         Etc_Buffer_In.LANFloat[7] = 8
 	
         time.sleep(2)
