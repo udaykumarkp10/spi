@@ -536,7 +536,7 @@ def etc_scan():
         WatchDog = False
     else:
         WatchDog = True
-        print("Etc Watchdog active\n")
+        # print("Etc Watchdog active\n")
 
     TempLong.LANLong = Etc_Read_Reg_Wait(AL_STATUS_REG_0, 1)   # read the EtherCAT State Machine status
     Status = TempLong.LANByte[0] & 0x0F        # Need to check this "and"
@@ -545,7 +545,7 @@ def etc_scan():
         Operational = True    # to see if we are in operational state
     else:
         Operational = False     # set/reset the corresponding flag
-        print("Etc not operational\n")
+        # print("Etc not operational\n")
 
 
     # process data xfer2t
@@ -553,10 +553,10 @@ def etc_scan():
         for i in range(8):
             Etc_Buffer_Out.LANLong[i] = 0
     else:
-        print("Read fifo\n")
+        # print("Read fifo\n")
         Etc_Read_Fifo()
 
-    print("Write fifo\n")
+    # print("Write fifo\n")
     Etc_Write_Fifo()
 
     if WatchDog:
