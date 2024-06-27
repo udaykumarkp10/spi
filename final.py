@@ -567,12 +567,16 @@ def etc_scan():
 def main():
     # Initialize EtherCAT interface
     etc_init()
-    chip_id = Etc_Read_Reg(ID_REV, 4)  # Replace 0x1234 with the actual register address
-    print(chip_id)
+    
+    # Read EtherCAT chip ID
+    chip_id = Etc_Read_Reg(ID_REV, 4)
+    print("EtherCAT Chip ID:", chip_id)
     
     while True:
+        # Scan for EtherCAT data
         etc_scan()
         
+        # Read data from Etc_Buffer_Out (data sent from TwinCAT)
         etc_out_0 = Etc_Buffer_Out.LANLong[0]
         etc_out_1 = Etc_Buffer_Out.LANLong[1]
         etc_out_2 = Etc_Buffer_Out.LANLong[2]
@@ -582,6 +586,10 @@ def main():
         etc_out_6 = Etc_Buffer_Out.LANLong[6]
         etc_out_7 = Etc_Buffer_Out.LANLong[7]
 
+        # Print received data from TwinCAT
+        print(f"Received from TwinCAT: {etc_out_0}, {etc_out_1}, {etc_out_2}, {etc_out_3}, {etc_out_4}, {etc_out_5}, {etc_out_6}, {etc_out_7}")
+        
+        # Write data to Etc_Buffer_In (data sent to TwinCAT)
         Etc_Buffer_In.LANLong[0] = 1
         Etc_Buffer_In.LANLong[1] = 2
         Etc_Buffer_In.LANLong[2] = 3
@@ -590,8 +598,9 @@ def main():
         Etc_Buffer_In.LANLong[5] = 6
         Etc_Buffer_In.LANLong[6] = 7  
         Etc_Buffer_In.LANLong[7] = 8
-	    
-	time.sleep(0.3)
-	    
+        
+        # Wait for 0.3 seconds before next iteration
+        time.sleep(0.3)
+
 if __name__ == "__main__":
     main()  # Call the main function
