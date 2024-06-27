@@ -588,8 +588,8 @@ def main():
         Etc_Buffer_In.LANLong[1] = 2
         
         # Read data sent from TwinCAT to Etc_Buffer_In (assuming LANLong[4] and LANLong[5] for example)
-        etc_in_0 = Etc_Buffer_In.LANLong[4]
-        etc_in_1 = Etc_Buffer_In.LANLong[5]
+        etc_in_0 = Etc_Buffer_In.LANLong[1]
+        etc_in_1 = Etc_Buffer_In.LANLong[2]
         
         # Print sent data to TwinCAT for verification
         print(f"Sent to TwinCAT: {etc_in_0}, {etc_in_1}")
