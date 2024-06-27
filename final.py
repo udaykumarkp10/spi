@@ -212,7 +212,7 @@ Etc_Buffer_In = PROCBUFFER()
 
 spi = spidev.SpiDev()
 spi.open(2, 0)  # Open SPI bus 2, device 0
-spi.max_speed_hz = 3000000
+spi.max_speed_hz = 3000000   # 3MHz
 spi.bits_per_word = 8  # Data size is 8 bits (SPI_DATASIZE_8BIT)
 spi.lsbfirst = False  # MSB first (SPI_FIRSTBIT_MSB)
 spi.threewire = False  # Use 3-wire mode (SPI_DIRECTION_2LINES)
@@ -284,33 +284,13 @@ def Etc_Read_Reg(address, length):
     xfrbuf[1] = Addr.LANByte[1]  # Address high byte
     xfrbuf[2] = Addr.LANByte[0]  # Address low byte
 
-    print()
-    print("Entered Read_reg")
-    print()
-    print("xfrbuf before filling: ", end="")
-    for i in range(3):
-        print("{:02X} ".format(xfrbuf[i]), end="")          
-
     for i in range(length):
         xfrbuf[i + 3] = DUMMY_BYTE  # Fill dummy bytes after address bytes
-
-    print("\nxfrbuf after filling: ", end="")
-    for i in range(7):
-        print("{:02X} ".format(xfrbuf[i]), end="")
 
     # Convert ctypes array to list of bytes
     xfrbuf_list = [byte for byte in xfrbuf]
 
     response = spi.xfer2(xfrbuf_list)
-
-    # print("\nresponse:", response)  # Print the response received from spi.xfer(xfrbuf)
-
-    print()
-    print("Response in hexadecimal:")
-    for byte in response:
-        print("{:02X}".format(byte), end=" ")
-    print()
-    print("Done")
 
     # response = spi.xfer2(list(xfrbuf))  # Perform SPI xfer2 and receive response
     Result.LANLong = 0
@@ -330,25 +310,25 @@ def Etc_Write_Reg(address, DataOut):
 
     print()
 
-    print("Address:", Addr.LANWord)  # Print the value of Addr.LANWord
-    print("Data:", Data.LANLong)     # Print the value of Data.LANLong
+    # print("Address:", Addr.LANWord)  # Print the value of Addr.LANWord
+    # print("Data:", Data.LANLong)     # Print the value of Data.LANLong
 
 
     xfrbuf[0] = COMM_SPI_WRITE     # SPI write command
     xfrbuf[1] = Addr.LANByte[1]    # address of the register
     xfrbuf[2] = Addr.LANByte[0]    # to read, MsByte first
 
-    print("xfrbuf before filling: ", end="")
-    for i in range(3):
-        print("{:02X} ".format(xfrbuf[i]), end="")
-    print()
+    # print("xfrbuf before filling: ", end="")
+    # for i in range(3):
+    #     print("{:02X} ".format(xfrbuf[i]), end="")
+    # print()
     
     for i in range(4):
         xfrbuf[i+3] = Data.LANByte[i]       # Fill data bytes, lsb
     
-    print("\nxfrbuf after filling: ", end="")
-    for i in range(7):
-        print("{:02X} ".format(xfrbuf[i]), end="")
+    # print("\nxfrbuf after filling: ", end="")
+    # for i in range(7):
+    #     print("{:02X} ".format(xfrbuf[i]), end="")
 
     xfrbuf_list = [byte for byte in xfrbuf]
 
@@ -562,14 +542,35 @@ def main():
     
     while True:
         etc_scan()
+	# Read data from Etc_Buffer_Out (data sent from TwinCAT)
         etc_out_0 = Etc_Buffer_Out.LANLong[0]
         etc_out_1 = Etc_Buffer_Out.LANLong[1]
         etc_out_2 = Etc_Buffer_Out.LANLong[2]
         etc_out_3 = Etc_Buffer_Out.LANLong[3]
-        etc_out_4 = Etc_Buffer_Out.LANLong[4]
-        etc_out_5 = Etc_Buffer_Out.LANLong[5]
-        etc_out_6 = Etc_Buffer_Out.LANLong[6]
-        etc_out_7 = Etc_Buffer_Out.LANLong[7]
+        
+        # Print received data
+        print(f"Received from TwinCAT: {etc_out_0}, {etc_out_1}, {etc_out_2}, {etc_out_3}")
+
+	# Write data to Etc_Buffer_In (data sent to TwinCAT)
+        Etc_Buffer_In.LANLong[0] = 1
+        Etc_Buffer_In.LANLong[1] = 2
+        Etc_Buffer_In.LANLong[2] = 3
+        Etc_Buffer_In.LANLong[3] = 4
+        
+        time.sleep(0.3)  # Wait for 2 seconds before next iteration
+	
+
+
+
+
+        # etc_out_0 = Etc_Buffer_Out.LANLong[0]
+        # etc_out_1 = Etc_Buffer_Out.LANLong[1]
+        # etc_out_2 = Etc_Buffer_Out.LANLong[2]
+        # etc_out_3 = Etc_Buffer_Out.LANLong[3]
+        # etc_out_4 = Etc_Buffer_Out.LANLong[4]
+        # etc_out_5 = Etc_Buffer_Out.LANLong[5]
+        # etc_out_6 = Etc_Buffer_Out.LANLong[6]
+        # etc_out_7 = Etc_Buffer_Out.LANLong[7]
 
         # Etc_Buffer_In.LANLong[0] = 1
         # Etc_Buffer_In.LANLong[1] = 2
@@ -579,8 +580,7 @@ def main():
         # Etc_Buffer_In.LANLong[5] = 6
         # Etc_Buffer_In.LANLong[6] = 7  
         # Etc_Buffer_In.LANLong[7] = 8
-	
-        time.sleep(2)
+
 
 if __name__ == "__main__":
     main()  # Call the main function
