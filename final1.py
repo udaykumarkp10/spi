@@ -408,15 +408,16 @@ def etc_scan():
         Operational = False     # set/reset the corresponding flag
         # print("Etc not operational\n")
 
-
     # process data xfer2t
-    if WatchDog or not Operational:
+    # if WatchDog or not Operational:
+    if WatchDog | (not Operational):
         for i in range(8):
             Etc_Buffer_Out.LANLong[i] = 0
     else:
-        # print("Read fifo\n")
+        print("Read fifo\n")
         Etc_Read_Fifo()
 
+    Etc_Read_Fifo()
     Etc_Write_Fifo()
 
     if WatchDog:
