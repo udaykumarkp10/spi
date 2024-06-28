@@ -376,7 +376,6 @@ def Etc_Write_Fifo():
 
 
 # initialize / check the etc interface on SPI, return true if initialization is ok
-
 def etc_init():
     TempLong = ULONG()
 
