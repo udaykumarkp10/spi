@@ -206,6 +206,10 @@ class PROCBUFFER(ctypes.Union):
 Etc_Buffer_Out = PROCBUFFER()
 Etc_Buffer_In = PROCBUFFER()
 
+# Zero initialize the LANByte array
+for i in range(32):
+    Etc_Buffer_Out.LANByte[i] = 0
+    Etc_Buffer_In.LANByte[i] = 0
 
 # Open SPI device
 
@@ -217,9 +221,8 @@ spi.lsbfirst = False  # MSB first (SPI_FIRSTBIT_MSB)
 spi.threewire = False  # Use 3-wire mode (SPI_DIRECTION_2LINES)
 spi.cshigh = False  # Chip Select active low
 
-
-Etc_Buffer_Out.LANByte[:] = [0] * 32     #  etc routines
-Etc_Buffer_In.LANByte[:] = [0] * 32      # etc routines
+# Etc_Buffer_Out.LANByte[:] = [0] * 32     #  etc routines
+# Etc_Buffer_In.LANByte[:] = [0] * 32      # etc routines
 
 def Etc_Read_Reg(address, length):
     Result = ULONG()  # Initialize Result as ULONG instance
@@ -459,23 +462,40 @@ def main():
         
         # Read data from Etc_Buffer_Out (data sent from TwinCAT)
         etc_out_0 = Etc_Buffer_Out.LANLong[0]
+	one = Etc_Buffer_Out.LANLong[0]
+	
         etc_out_1 = Etc_Buffer_Out.LANLong[1]
+	two = Etc_Buffer_Out.LANLong[1]
+	
         etc_out_2 = Etc_Buffer_Out.LANLong[2]
+	three = Etc_Buffer_Out.LANLong[2]
+	    
         etc_out_3 = Etc_Buffer_Out.LANLong[3]
+	four = Etc_Buffer_Out.LANLong[3]
+	
         etc_out_4 = Etc_Buffer_Out.LANLong[4]
+	five = Etc_Buffer_Out.LANLong[4]
+	    
         etc_out_5 = Etc_Buffer_Out.LANLong[5]
+	six = Etc_Buffer_Out.LANLong[5]
+	    
         etc_out_6 = Etc_Buffer_Out.LANLong[6]
+	seven = Etc_Buffer_Out.LANLong[6]
+	    
         etc_out_7 = Etc_Buffer_Out.LANLong[7]
+	eight = Etc_Buffer_Out.LANLong[7]
         
         # Print received data from TwinCAT
         print(f"Received from TwinCAT: {etc_out_0}, {etc_out_1}, {etc_out_2}, {etc_out_3}, {etc_out_4}, {etc_out_5}, {etc_out_6}, {etc_out_7}")
+	print(f"Received from TwinCAT: {one}, {two}, {three}, {four}, {five}, {six}, {seven}, {eight}")
         
+	    
         # Write data to Etc_Buffer_In (data sent to TwinCAT)
         Etc_Buffer_In.LANLong[0] = 1
         Etc_Buffer_In.LANLong[1] = 2
         
         # Wait for 0.3 seconds before next iteration
-        time.sleep(0.2)
+        time.sleep(0.1)
 
 if __name__ == "__main__":
     main()  # Call the main function
