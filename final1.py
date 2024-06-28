@@ -286,7 +286,6 @@ def Etc_Read_Reg_Wait(address, length):
     Etc_Write_Reg(ECAT_CSR_CMD, TempLong.LANLong) # write the command
     TempLong.LANByte[3] = ECAT_CSR_BUSY
 
-    # do while need to have a look
     TempLong.LANLong = Etc_Read_Reg(ECAT_CSR_CMD, 4)
     while (TempLong.LANByte[3] & ECAT_CSR_BUSY):   # wait for command execution
         TempLong.LANLong = Etc_Read_Reg(ECAT_CSR_CMD, 4)
@@ -295,9 +294,7 @@ def Etc_Read_Reg_Wait(address, length):
 
     return TempLong.LANLong
 
-
 # write an indirectly addressable register, 4 bytes always
-
 def Etc_Write_Reg_Wait(address, DataOut):
     TempLong = ULONG()
     Addr = UWORD()
@@ -445,6 +442,7 @@ def etc_scan():
         Etc_Read_Fifo()
 
     # print("Write fifo\n")
+    Etc_Read_Fifo()
     Etc_Write_Fifo()
 
     if WatchDog:
