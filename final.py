@@ -579,23 +579,22 @@ def main():
         # Read data from Etc_Buffer_Out (data sent from TwinCAT)
         etc_out_0 = Etc_Buffer_Out.LANLong[0]
         etc_out_1 = Etc_Buffer_Out.LANLong[1]
+        etc_out_2 = Etc_Buffer_Out.LANLong[2]
+        etc_out_3 = Etc_Buffer_Out.LANLong[3]
+        etc_out_4 = Etc_Buffer_Out.LANLong[4]
+        etc_out_5 = Etc_Buffer_Out.LANLong[5]
+        etc_out_6 = Etc_Buffer_Out.LANLong[6]
+        etc_out_7 = Etc_Buffer_Out.LANLong[7]
         
         # Print received data from TwinCAT
-        print(f"Received from TwinCAT: {etc_out_0}, {etc_out_1}")
+        print(f"Received from TwinCAT: {etc_out_0}, {etc_out_1}, {etc_out_2}, {etc_out_3}, {etc_out_4}, {etc_out_5}, {etc_out_6}, {etc_out_7}")
         
         # Write data to Etc_Buffer_In (data sent to TwinCAT)
         Etc_Buffer_In.LANLong[0] = 1
         Etc_Buffer_In.LANLong[1] = 2
         
-        # Read data sent from TwinCAT to Etc_Buffer_In (assuming LANLong[4] and LANLong[5] for example)
-        etc_in_0 = Etc_Buffer_In.LANLong[0]
-        etc_in_1 = Etc_Buffer_In.LANLong[1]
-        
-        # Print sent data to TwinCAT for verification
-        print(f"Sent to TwinCAT: {etc_in_0}, {etc_in_1}")
-        
         # Wait for 0.3 seconds before next iteration
-        time.sleep(0.3)
+        time.sleep(0.2)
 
 if __name__ == "__main__":
     main()  # Call the main function
