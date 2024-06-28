@@ -321,7 +321,7 @@ def Etc_Read_Fifo():
     response = spi.xfer2(xfrbuf_list)
 
     for i in range(32):        # 32 bytes read data to usable buffer
-        Etc_Buffer_Out.LANByte[i] = xfrbuf[i+3]          # Need to check
+        Etc_Buffer_Out.LANByte[i] = xfrbuf_list[i+3]          # Need to check
 
 
 # write to the process ram fifo
