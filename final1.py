@@ -341,8 +341,10 @@ def Etc_Read_Fifo():
     for i in range(32):
         xfrbuf[i+3] = DUMMY_BYTE
 
+    xfrbuf_list = [byte for byte in xfrbuf]
+
     # Transmit function
-    response = spi.xfer2(xfrbuf)
+    response = spi.xfer2(xfrbuf_list)
 
     for i in range(32):        # 32 bytes read data to usable buffer
         Etc_Buffer_Out.LANByte[i] = xfrbuf[i+3]          # Need to check
@@ -370,8 +372,10 @@ def Etc_Write_Fifo():
     for i in range(32):                      # 32 bytes write loop
         xfrbuf[i+3] = Etc_Buffer_In.LANByte[i]
 
+    xfrbuf_list = [byte for byte in xfrbuf]
+
     # Transmit function
-    response = spi.xfer2(xfrbuf)
+    response = spi.xfer2(xfrbuf_list)
 
 
 # initialize / check the etc interface on SPI, return true if initialization is ok
