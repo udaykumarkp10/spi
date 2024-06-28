@@ -453,7 +453,7 @@ def main():
     # Initialize EtherCAT interface
     etc_init()
     # Read EtherCAT chip ID
-    chip_id = Etc_Read_Reg(0x0000, 4)  # Using a dummy ID_REV address
+    chip_id = Etc_Read_Reg(ID_REV, 4)  # Using a dummy ID_REV address
     print("EtherCAT Chip ID:", chip_id)
     
     while True:
