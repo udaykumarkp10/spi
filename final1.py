@@ -294,29 +294,6 @@ def Etc_Read_Reg_Wait(address, length):
 
     return TempLong.LANLong
 
-# write an indirectly addressable register, 4 bytes always
-def Etc_Write_Reg_Wait(address, DataOut):
-    TempLong = ULONG()
-    Addr = UWORD()
-
-    Addr.LANWord = address
-    Etc_Write_Reg(ECAT_CSR_DATA, DataOut)                 # write the data
-
-    # compose the command
-    TempLong.LANByte[0] = Addr.LANByte[0]                 # address of the register
-    TempLong.LANByte[1] = Addr.LANByte[1]                 # to write, LsByte first
-    TempLong.LANByte[2] = 4                               # we write always 4 bytes
-    TempLong.LANByte[3] = ESC_WRITE                       # ESC write
-
-    Etc_Write_Reg(ECAT_CSR_CMD, TempLong.LANLong)         # write the command
-    TempLong.LANByte[3] = ECAT_CSR_BUSY
-
-    # do while need to have a look
-    TempLong.LANLong = Etc_Read_Reg(ECAT_CSR_CMD, 4)
-    while (TempLong.LANByte[3] & ECAT_CSR_BUSY):
-        TempLong.LANLong = Etc_Read_Reg(ECAT_CSR_CMD, 4)
-
-
 # read from process ram fifo
 def Etc_Read_Fifo():
     TempLong = ULONG()
