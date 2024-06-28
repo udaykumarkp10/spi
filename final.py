@@ -165,20 +165,19 @@ Operational = False
 
 chip_id = ctypes.c_uint32(0)
 
+# Define input variables as unsigned 32-bit integers
 etc_in_0 = ctypes.c_uint32(0)
 etc_in_1 = ctypes.c_uint32(0)
+etc_in_2 = ctypes.c_uint32(0)
+etc_in_3 = ctypes.c_uint32(0)
+etc_in_4 = ctypes.c_uint32(0)
 etc_in_5 = ctypes.c_uint32(0)
 etc_in_6 = ctypes.c_uint32(0)
+etc_in_7 = ctypes.c_uint32(0)
 
-# Float variables
-etc_in_2 = ctypes.c_float(0.0)
-etc_in_3 = ctypes.c_float(0.0)
-etc_in_4 = ctypes.c_float(0.0)
-etc_in_7 = ctypes.c_float(0.0)
-
-# Output variables (assuming they are also unsigned 32-bit integers and floats)
+# Define output variables as unsigned 32-bit integers
 etc_out_0 = ctypes.c_uint32(0)
-etc_out_1 = ctypes.c_float(0.0)
+etc_out_1 = ctypes.c_uint32(0)
 etc_out_2 = ctypes.c_uint32(0)
 etc_out_3 = ctypes.c_uint32(0)
 etc_out_4 = ctypes.c_uint32(0)
