@@ -233,7 +233,7 @@ class EtherCATInterface:
         TempLong.LANByte[2] = length                   # number of bytes to read
         TempLong.LANByte[3] = ESC_READ                   # ESC read
 
-        self.write_reg(ECAT_CSR_CMD, TempLong.LANLong, 4) # write the command
+        self.write_reg(ECAT_CSR_CMD, TempLong.LANLong) # write the command
         TempLong.LANByte[3] = ECAT_CSR_BUSY
 
         TempLong.LANLong = self.read_reg(ECAT_CSR_CMD, 4)
