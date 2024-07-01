@@ -206,7 +206,7 @@ class EtherCATInterface:
 
         return Result.LANLong
 
-    def write_reg(self, address, data, length):
+    def write_reg(self, address, data):
         Addr = UWORD()    # Initialize Addr as UWORD instance and set address
         Data = ULONG()    # Initialize Data as ULONG instance and set data
         xfrbuf = (ctypes.c_uint8 * 7)()  # Create buffer for SPI xfer2
