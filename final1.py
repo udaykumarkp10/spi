@@ -211,8 +211,7 @@ for i in range(32):
     Etc_Buffer_Out.LANByte[i] = 0
     Etc_Buffer_In.LANByte[i] = 0
 
-# Open SPI device
-
+# Open SPI devic
 spi = spidev.SpiDev()
 spi.open(2, 0)  # Open SPI bus 2, device 0
 spi.max_speed_hz = 3000000   # 3MHz
@@ -270,7 +269,6 @@ def Etc_Write_Reg(address, DataOut):
 
 
 # read an indirectly addressable register
-
 def Etc_Read_Reg_Wait(address, length):
     TempLong = ULONG()
     Addr = UWORD()
