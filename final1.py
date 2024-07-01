@@ -416,8 +416,7 @@ def etc_scan():
     else:
         print("Read fifo\n")
         Etc_Read_Fifo()
-
-    Etc_Read_Fifo()
+	    
     Etc_Write_Fifo()
 
     if WatchDog:
