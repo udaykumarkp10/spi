@@ -221,8 +221,6 @@ spi.lsbfirst = False  # MSB first (SPI_FIRSTBIT_MSB)
 spi.threewire = False  # Use 3-wire mode (SPI_DIRECTION_2LINES)
 spi.cshigh = False  # Chip Select active low
 
-# Etc_Buffer_Out.LANByte[:] = [0] * 32     #  etc routines
-# Etc_Buffer_In.LANByte[:] = [0] * 32      # etc routines
 
 def Etc_Read_Reg(address, length):
     Result = ULONG()  # Initialize Result as ULONG instance
@@ -325,7 +323,6 @@ def Etc_Read_Fifo():
 
 
 # write to the process ram fifo
-
 def Etc_Write_Fifo():
     TempLong = ULONG()
     xfrbuf = (ctypes.c_uint8 * 35)()    # buffer for spi xfr
@@ -383,7 +380,6 @@ def etc_init():
   
 
 # one scan of etc
-
 def etc_scan():
     global WatchDog, Operational
     WatchDog = False
