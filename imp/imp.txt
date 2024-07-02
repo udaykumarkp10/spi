@@ -1,6 +1,8 @@
 scp /home/udaykumar/Desktop/draft/image.jpeg root@colibri-imx7-emmc-15048509.local:/home/root/pictures
 
 so far final.py is working
+updated
+sooo far final1.py is working and updated one
 
 import spidev
 import time
