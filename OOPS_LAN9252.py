@@ -358,7 +358,6 @@ class EtherCATInterface:
 
         return Status
 
-
 def main():
     # Initialize EtherCAT interface
     etc_interface = EtherCATInterface()
