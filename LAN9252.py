@@ -420,7 +420,6 @@ def etc_scan():
 
     return Status
 
-
 def main():
     # Initialize EtherCAT interface
     etc_init_ok = etc_init()
