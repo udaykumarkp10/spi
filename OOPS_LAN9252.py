@@ -135,10 +135,10 @@ ETHERCAT_RST = 0x00000040
 
 # EtherCAT flags
 ESM_INIT = 0x01                  # init
-ESM_PREOP = 0x02                  # pre-operational
+ESM_PREOP = 0x02                 # pre-operational
 ESM_BOOT = 0x03                  # bootstrap
-ESM_SAFEOP = 0x04                  # safe-operational
-ESM_OP = 0x08                  # operational
+ESM_SAFEOP = 0x04                # safe-operational
+ESM_OP = 0x08                    # operational
 
 # ESC commands
 ESC_WRITE = 0x80
