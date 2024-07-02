@@ -341,7 +341,7 @@ class EtherCATInterface:
             Operational = False     # set/reset the corresponding flag
             # print("Etc not operational\n")
 
-        # process data xfer2t
+        # process data 
         # if WatchDog or not Operational:
         if WatchDog | (not Operational):
             for i in range(8):
