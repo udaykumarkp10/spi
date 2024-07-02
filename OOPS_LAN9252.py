@@ -319,7 +319,6 @@ class EtherCATInterface:
 
     def etc_scan(self):
         global WatchDog, Operational
-        print("Entered into scan\n")
         WatchDog = False
         Operational = False
         TempLong = ULONG()
