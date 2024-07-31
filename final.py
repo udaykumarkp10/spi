@@ -575,7 +575,7 @@ def main():
         # Simulate scanning for EtherCAT data (replace with actual scan function)
         etc_scan()
         
-        # Read data from Etc_Buffer_Out (data sent from TwinCAT)
+        # Read data from Etc_Buffer_Out (data sent from TwinCAT(Computer)
         etc_out_0 = Etc_Buffer_Out.LANLong[0]
         etc_out_1 = Etc_Buffer_Out.LANLong[1]
         etc_out_2 = Etc_Buffer_Out.LANLong[2]
